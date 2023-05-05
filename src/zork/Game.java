@@ -130,7 +130,7 @@ public class Game {
       printHelp();
     else if (commandWord.equals("go"))
       goRoom(command);
-    else if (commandWord.equals("quit")) {
+    else if (commandWord.equals("quit") || commandWord.equals("exit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else

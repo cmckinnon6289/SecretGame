@@ -23,6 +23,12 @@ public class CoordKey {
         this.y = Integer.valueOf(room.getRoomCoords().y);
     }
 
+    /**
+     * Updates coordinates.
+     * @param val - value to update
+     * @param inc - increment
+    */
+
     public void addTo(String val, int inc) {
         if (val.equals("x"))
             this.x += inc;
