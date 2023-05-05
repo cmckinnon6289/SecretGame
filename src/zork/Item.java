@@ -11,6 +11,12 @@ public class Item extends OpenableObject {
     this.isOpenable = isOpenable;
   }
 
+  public Item() {
+    this.weight = 0;
+    this.name = "DEFAUL ITEM";
+    this.isOpenable = false;
+  }
+
   public void open() {
     if (!isOpenable)
       System.out.println("The " + name + " cannot be opened.");

@@ -3,7 +3,7 @@
     {
       "id": "-1,0",
       "name": "Unknown",
-      "description": "It's unclear where you are. You hear faint crying to the north. It sounds human.\nThere are exits to the north, east, south, and west.",
+      "description": "There's blood on the west wall. You hear faint crying to the north. It sounds human.\nThere are exits to the north, east, south, and west.",
       "x": -1,
       "y": 0,
       "isLocked": false,
@@ -12,7 +12,7 @@
     {
       "id": "0,0",
       "name": "Red Circle Room",
-      "description": "It's unclear where you are. There's a red circle on the wall.\nThere are exits to the east and west.",
+      "description": "There's a red circle on the wall.\nThere are exits to the east and west.",
       "x": 0,
       "y": 0,
       "isLocked": false,
@@ -21,7 +21,7 @@
     {
       "id": "1,0",
       "name": "Unknown",
-      "description": "It's unclear where you are.\nThere are exits to the north, south, and west.",
+      "description": "There's nothing special here.\nThere are exits to the north, south, and west.",
       "x": 1,
       "y": 0,
       "isLocked": false,
