@@ -10,6 +10,9 @@ public class Room {
   private Boolean isLocked;
   private CoordKey coords;
   private ArrayList<String> passages;
+  private ArrayList<Item> itemsInRoom = new ArrayList<Item>();
+
+  public static HashMap<Room,Item[]> itemsList = new HashMap<Room,Item[]>();
 
   public ArrayList<String> getPassages() {
     return passages;
