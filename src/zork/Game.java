@@ -102,14 +102,13 @@ public class Game {
   private void printWelcome() {
     System.out.println();
     System.out.println("You wake up on your side in a concrete fortress. Your eyes are dry and your vision is blurry.");
-    System.out.println("You don't know where you are, nor how you got here. You stagger onto your feet as best you can.");
+    System.out.println("You don't know where you are, nor how you got here. You stagger onto your feet and shake.");
     System.out.println("Your stomach whimpers with pain. You hear nothing except it. Then a deafening thud.");
     System.out.println("Your compulsion to move overrides the excruciating pain. You don't know what made that thud,");
     System.out.println("but you don't want it to get any closer to you.");
     System.out.println();
     System.out.println("----------");
-    System.out.println();
-    System.out.println("Welcome to the maze!");
+    System.out.println("Welcome to the facility.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();
     System.out.println(currentRoom.description());
@@ -136,7 +135,9 @@ public class Game {
       else
         return true; // signal that we want to quit
     } else if (commandWord.equals("eat")) {
-      System.out.println("Do you really think you should be eating at a time like this?");
+      System.out.println("Crumbs fall out of your pocket and disappear just as quickly.");
+    } else if (commandWord.equals("take")) {
+      
     }
     return false;
   }

@@ -9,37 +9,47 @@ public class Item extends OpenableObject {
   private boolean isOpenable;
   public static HashMap<Room,ArrayList<Item>> supplyRoster = new HashMap<Room,ArrayList<Item>>();
 
-  public Item(int weight, String name, boolean isOpenable, Room place) {
+  public Item(int weight, String name, boolean isOpenable, Room location) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
-    Room location = place;
+    this.place(location);
   }
 
-  public Item() {
-    this.weight = 0;
-    this.name = "DEFAULT ITEM";
-    this.isOpenable = false;
-    CoordKey t = new CoordKey(0,0);
-    Room location = Game.roomMap.get(t);
-  }
+  /**
+   * Adds an item to a HashMap of items. Each room with items has an {@code ArrayList<Item>} with all the items in the room. Checks whether the Room already has an entry in the {@code HashMap<Room, ArrayList<Item>> supplyRoster} and reacts accordingly.
+   * @param key (Room)
+  */
 
-  public void account(Room key,Item toAdd) {
+  public void place(Room key) {
     if (supplyRoster.containsKey(key)) {
       ArrayList<Item> send = supplyRoster.get(key);
-      send.add(toAdd);
+      send.add(this);
       supplyRoster.put(key,send);
     } else {
       ArrayList<Item> send = new ArrayList<Item>();
-      send.add(toAdd);
+      send.add(this);
       supplyRoster.put(key,send);
     }
   }
 
-  public void open() {
-    if (!isOpenable)
-      System.out.println("The " + name + " cannot be opened.");
+  public ArrayList<Item> getRoomItems(Room t) {
+    try {
+      return supplyRoster.get(t);
+    } catch (Exception ex) {
+      return null;
+    }
+  }
 
+  public void open() {
+    if (!isOpenable) {
+      if (!super.isLocked())
+        System.out.println(this.name + " isn't something you can open.");
+      else
+        System.out.println("The key hole catches your eye as you fail to open it.");
+    } else {
+      
+    }
   }
 
   public int getWeight() {
