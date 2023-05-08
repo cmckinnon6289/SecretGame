@@ -76,6 +76,27 @@ public class Game {
     }
   }
 
+  private void initItems(String fileName) throws Exception {
+    Path path = Path.of(fileName);
+    String jsonString = Files.readString(path);
+    JSONParser parser = new JSONParser();
+    JSONObject json = (JSONObject) parser.parse(jsonString);
+
+    JSONArray jsonItems = (JSONArray) json.get("items");
+
+    for (Object itemObj : jsonItems) {
+      String itemName = (String) ((JSONObject) itemObj).get("name");
+      int weight = (int) ((JSONObject) itemObj).get("weight");
+      Boolean openable = (Boolean) ((JSONObject) itemObj).get("openable");
+      Boolean isKey = (Boolean) ((JSONObject) itemObj).get("isKey");
+      if (isKey) {
+
+      } else {
+        Item item = new Item(weight,itemName,openable); // ERROR HERE
+      }
+    }
+  }
+
   /**
    * Main play routine. Loops until end of play.
    */
@@ -137,7 +158,7 @@ public class Game {
     } else if (commandWord.equals("eat")) {
       System.out.println("Crumbs fall out of your pocket and disappear just as quickly.");
     } else if (commandWord.equals("take")) {
-      
+
     }
     return false;
   }

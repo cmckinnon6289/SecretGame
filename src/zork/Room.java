@@ -12,7 +12,7 @@ public class Room {
   private ArrayList<String> passages;
   private ArrayList<Item> itemsInRoom = new ArrayList<Item>();
 
-  public static HashMap<Room,Item[]> itemsList = new HashMap<Room,Item[]>();
+  public static HashMap<Room,ArrayList<Item>> itemsList = new HashMap<Room,ArrayList<Item>>();
 
   public ArrayList<String> getPassages() {
     return passages;
@@ -103,13 +103,16 @@ public class Room {
     }
   }
 
-  /*
-   * private int getDirectionIndex(String direction) { int dirIndex = 0; for
-   * (String dir : directions) { if (dir.equals(direction)) return dirIndex; else
-   * dirIndex++; }
-   * 
-   * throw new IllegalArgumentException("Invalid Direction"); }
-   */
+  public void initRoomItems() {
+    Game.roomMap.forEach((key,room) -> {
+      try {
+        room.itemsInRoom = itemsList.get(room);
+      } catch(Exception e) {
+        room.itemsInRoom = null;
+      }
+    });
+  }
+
   public String getRoomName() {
     return roomName;
   }

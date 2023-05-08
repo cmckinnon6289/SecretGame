@@ -16,7 +16,15 @@ public class Item extends OpenableObject {
     this.place(location);
   }
 
-  /**
+  public Item() {
+    this.weight = 0;
+    this.name = "DEFAULT ITEM";
+    this.isOpenable = false;
+    CoordKey t = new CoordKey(0,0);
+    this.place(Game.roomMap.get(t));
+  }
+
+/**
    * Adds an item to a HashMap of items. Each room with items has an {@code ArrayList<Item>} with all the items in the room. Checks whether the Room already has an entry in the {@code HashMap<Room, ArrayList<Item>> supplyRoster} and reacts accordingly.
    * @param key (Room)
   */
@@ -48,7 +56,7 @@ public class Item extends OpenableObject {
       else
         System.out.println("The key hole catches your eye as you fail to open it.");
     } else {
-      
+
     }
   }
 
@@ -74,6 +82,15 @@ public class Item extends OpenableObject {
 
   public void setOpenable(boolean isOpenable) {
     this.isOpenable = isOpenable;
+  }
+
+  public void setLocation(Room location) {
+    supplyRoster.forEach((room,items) -> {
+      if (items.contains(this)) {
+        items.remove(this);
+      }
+    });
+    this.place(location);
   }
 
 }
