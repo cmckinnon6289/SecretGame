@@ -112,7 +112,7 @@ public class Game {
       if (isKey) {
         // handle specially
       } else {
-        Item item = new Item(weight,itemName,openable); // ERROR HERE     
+        Item item = new Item(weight,itemName,openable,location);
       }
     }
   } 
