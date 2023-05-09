@@ -112,10 +112,11 @@ public class Game {
       if (isKey) {
         // handle specially
       } else {
-        Item item = new Item(weight,itemName,openable,location);
+        Item item = new Item(weight,itemName,openable); // ERROR HERE     
       }
     }
-  }
+  } 
+        
 
   /**
    * Main play routine. Loops until end of play.
