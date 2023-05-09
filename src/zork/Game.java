@@ -12,26 +12,43 @@ import org.json.simple.parser.JSONParser;
 public class Game {
   public static int moves = 1;
   public static int HP = 10;
-  
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
 
   private Parser parser;
   private static Room currentRoom;
-
+  
   /**
    * Create the game and initialise its internal map.
    */
   public Game() {
     try {
       milestoneCheck();
-      initItems("src\\zork\\data\\items.json");
-      initRooms("src\\zork\\data\\rooms.json");
+      initGame();
       CoordKey initCoords = new CoordKey(0,0);
       currentRoom = roomMap.get(initCoords);
     } catch (Exception e) {
       e.printStackTrace();
     }
     parser = new Parser();
+  }
+
+  private void initGame() throws Exception {
+    try {
+      initItems("src\\zork\\data\\items.json");
+      initRooms("src\\zork\\data\\rooms.json");
+      initSFX("src\\zork\\data\\sfx");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void initSFX(String path) throws Exception {
+
+  }
+
+  private void ambience() {
+    int ambNum = (int) (Math.round(Math.random()*25));
+
   }
 
   private void milestoneCheck() {
