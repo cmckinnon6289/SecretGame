@@ -92,10 +92,11 @@ public class Game {
       if (isKey) {
 
       } else {
-        Item item = new Item(weight,itemName,openable); // ERROR HERE
+        Item item = new Item(weight,itemName,openable); // ERROR HERE     
       }
     }
-  }
+  } 
+        
 
   /**
    * Main play routine. Loops until end of play.
