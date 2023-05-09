@@ -24,6 +24,7 @@ public class Game {
   public Game() {
     try {
       milestoneCheck();
+      initItems("src\\zork\\data\\items.json");
       initRooms("src\\zork\\data\\rooms.json");
       CoordKey initCoords = new CoordKey(0,0);
       currentRoom = roomMap.get(initCoords);
@@ -34,12 +35,12 @@ public class Game {
   }
 
   private void milestoneCheck() {
-    int increment = 13;
-    if (moves == increment) {
+    int increment = 14;
+    if (moves == increment+3) {
       System.out.println("-----");
       System.out.println("Your stomach pangs. When was your last meal?");
       System.out.println("-----");
-    } else if (moves == 3 * increment) {
+    } else if (moves == increment*3) {
       System.out.println("-----");
       System.out.println("Awareness gives way to lightheadedness. You can barely stand straight.\nYour sense of direction is hazy.");
       System.out.println("-----");
@@ -86,13 +87,15 @@ public class Game {
 
     for (Object itemObj : jsonItems) {
       String itemName = (String) ((JSONObject) itemObj).get("name");
-      int weight = (int) ((JSONObject) itemObj).get("weight");
+      Double weight = (Double) ((JSONObject) itemObj).get("weight");
       Boolean openable = (Boolean) ((JSONObject) itemObj).get("openable");
       Boolean isKey = (Boolean) ((JSONObject) itemObj).get("isKey");
+      CoordKey locationKey = new CoordKey(((Long) ((JSONObject) itemObj).get("x")).intValue(),((Long) ((JSONObject) itemObj).get("y")).intValue());
+      Room location = roomMap.get(locationKey);
       if (isKey) {
-
+        // handle specially
       } else {
-        Item item = new Item(weight,itemName,openable); // ERROR HERE
+        Item item = new Item(weight,itemName,openable,location);
       }
     }
   }

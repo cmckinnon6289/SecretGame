@@ -3,7 +3,7 @@ package zork;
 public class Key extends Item {
   private String keyId;
 
-  public Key(String keyId, String keyName, int weight, Room location) {
+  public Key(String keyId, String keyName, Double weight, Room location) {
     super(weight, keyName, false, location);
     this.keyId = keyId;
   }
