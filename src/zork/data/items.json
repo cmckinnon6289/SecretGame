@@ -1,0 +1,12 @@
+{
+    "items": [
+        {
+            "name": "tbd",
+            "x": -1,
+            "y": 3,
+            "weight": 0.5,
+            "openable": false,
+            "isKey": false
+        }
+    ]
+}
