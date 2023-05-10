@@ -27,7 +27,6 @@ public class Game {
    */
   public Game() {
     try {
-      milestoneCheck();
       initGame();
       CoordKey initCoords = new CoordKey(0,0);
       currentRoom = roomMap.get(initCoords);
@@ -53,35 +52,28 @@ public class Game {
   }
 
   private void ambience() {
-    int ambNum = (int) (Math.round(Math.random()*15));
-    System.out.println(ambNum);
+    int ambNum = (int) (Math.round(Math.random()*25));
+    String path = null;
     if (ambNum == 1) {
-      File sfe = new File("src\\zork\\data\\sfx\\thud.wav");
+      path = "src\\zork\\data\\sfx\\thud.wav";
+    } else if (ambNum == 9) {
+      path = "src\\zork\\data\\sfx\\gunfire.wav";
+    } else if (ambNum == 18) {
+      path = "src\\zork\\data\\sfx\\ghost.wav";
+    } if (path != null) {
+      File sfx = new File(path);
       try {
-        AudioHandler.playClip(sfe);
-      } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException e) {
-        e.printStackTrace();
-      }
-    } else if (ambNum == 4) {
-      File sfe = new File("src\\zork\\data\\sfx\\gunfire.wav");
-      try {
-        AudioHandler.playClip(sfe);
-      } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException e) {
-        e.printStackTrace();
-      }
-    } else if (ambNum == 8) {
-      File sfe = new File("src\\zork\\data\\sfx\\ghost.wav");
-      try {
-        AudioHandler.playClip(sfe);
+        AudioHandler.playClip(sfx);
       } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException e) {
         e.printStackTrace();
       }
     }
+    System.out.println(ambNum);
   }
 
   private void milestoneCheck() {
     int increment = 14;
-    if (moves == increment+3) {
+    if (moves == increment) {
       System.out.println("-----");
       System.out.println("Your stomach pangs. When was your last meal?");
       System.out.println("-----");
@@ -155,10 +147,12 @@ public class Game {
     boolean finished = false;
     while (!finished) {
       Command command;
+      moves++;
       try {
         command = parser.getCommand();
         finished = processCommand(command);
         ambience();
+        milestoneCheck();
       } catch (IOException e) {
         e.printStackTrace();
       }
