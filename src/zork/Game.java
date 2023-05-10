@@ -1,9 +1,14 @@
 package zork;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Scanner;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -36,19 +41,42 @@ public class Game {
     try {
       initItems("src\\zork\\data\\items.json");
       initRooms("src\\zork\\data\\rooms.json");
-      initSFX("src\\zork\\data\\sfx");
+      File bg = new File("src\\zork\\data\\sfx\\background.wav");
+      try {
+        AudioHandler.loopClip(bg);
+      } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+        e.printStackTrace();
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  private void initSFX(String path) throws Exception {
-
-  }
-
   private void ambience() {
-    int ambNum = (int) (Math.round(Math.random()*25));
-
+    int ambNum = (int) (Math.round(Math.random()*15));
+    System.out.println(ambNum);
+    if (ambNum == 1) {
+      File sfe = new File("src\\zork\\data\\sfx\\thud.wav");
+      try {
+        AudioHandler.playClip(sfe);
+      } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException e) {
+        e.printStackTrace();
+      }
+    } else if (ambNum == 4) {
+      File sfe = new File("src\\zork\\data\\sfx\\gunfire.wav");
+      try {
+        AudioHandler.playClip(sfe);
+      } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException e) {
+        e.printStackTrace();
+      }
+    } else if (ambNum == 8) {
+      File sfe = new File("src\\zork\\data\\sfx\\ghost.wav");
+      try {
+        AudioHandler.playClip(sfe);
+      } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   private void milestoneCheck() {
@@ -122,20 +150,38 @@ public class Game {
    * Main play routine. Loops until end of play.
    */
   public void play() {
+    printHeadphoneWarning();
     printWelcome();
-
     boolean finished = false;
     while (!finished) {
       Command command;
       try {
         command = parser.getCommand();
         finished = processCommand(command);
+        ambience();
       } catch (IOException e) {
         e.printStackTrace();
       }
-
     }
     System.out.println("Thank you for playing. Good bye.");
+  }
+
+  private void printHeadphoneWarning() {
+    Scanner confirmer = new Scanner(System.in);
+    System.out.println("----------");
+    System.out.println("For the most immersive experience, we recommend wearing headphones.");
+    System.out.println("Please type \"continue\" below when you are ready to proceed.");
+    System.out.println("----------");
+    Boolean ready = false;
+    while (!ready) {
+      String confirm = confirmer.nextLine();
+      if (confirm.equals("continue")) {
+        System.out.println("----------");
+        ready = true;
+      }
+      else
+        System.out.println("Invalid entry.");
+    }
   }
 
   /**

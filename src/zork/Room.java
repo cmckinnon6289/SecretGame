@@ -98,7 +98,6 @@ public class Room {
       }
     } catch (Exception ex) {
       System.out.println("Unknown error.");
-      ex.printStackTrace();
       return null;
     }
   }
