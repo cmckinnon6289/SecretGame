@@ -1,9 +1,18 @@
 {
   "rooms": [
     {
+      "id": "-1,2",
+      "name": "Crying",
+      "description": "There's blood on the west wall. You hear faint crying to the south. It sounds human.\nThere are exits to the south and east.",
+      "x": -1,
+      "y": 2,
+      "isLocked": false,
+      "passages": ["south","east"]
+    },
+    {
       "id": "-1,0",
       "name": "Crying",
-      "description": "There's blood on the west wall. You hear faint crying to the north. It sounds human.\nThere are exits to the north, east, south, and west.",
+      "description": "There's blood on the west wall. You hear faint crying to the north. It sounds human.\nThere are exits to the north, east, and south.",
       "x": -1,
       "y": 0,
       "isLocked": false,

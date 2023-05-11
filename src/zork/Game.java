@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -18,6 +19,7 @@ public class Game {
   public static int moves = 1;
   public static int HP = 10;
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
+  public static ArrayList<Item> inventory = new ArrayList<Item>();
 
   private Parser parser;
   private static Room currentRoom;
