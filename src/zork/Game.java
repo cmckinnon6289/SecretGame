@@ -109,6 +109,8 @@ public class Game {
       }
 
       room.setRoomDetails(roomName, roomDescription, coords, passages, isLocked);
+      if (roomMap.containsKey(coords))
+        throw new DuplicateRoomException(coords);
       roomMap.put(coords, room);
     }
   }
@@ -168,7 +170,7 @@ public class Game {
     Boolean ready = false;
     while (!ready) {
       String confirm = confirmer.nextLine();
-      if (confirm.equals("continue")) {
+      if (confirm.toLowerCase().equals("continue")) {
         System.out.println("----------");
         ready = true;
       }
@@ -189,6 +191,11 @@ public class Game {
     System.out.println("but you don't want it to get any closer to you.");
     System.out.println();
     System.out.println("----------");
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     System.out.println("Welcome to the facility.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();
@@ -247,12 +254,9 @@ public class Game {
       System.out.println("In the confusion, you forgot to specify which direction you want to go in.");
       return;
     }
-
     String direction = command.getSecondWord();
-
     // Try to leave current room.
     Room nextRoom = currentRoom.nextRoom(direction);
-
     if (nextRoom == null)
       System.out.println("You cannot go that way.");
     else {

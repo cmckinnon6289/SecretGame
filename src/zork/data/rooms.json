@@ -30,20 +30,29 @@
     {
       "id": "1,1",
       "name": "Red room",
-      "description": "You enter into a room lit entirely by red lights.",
+      "description": "You enter into a room lit entirely by red lights.\nThere are exits to the north, south, east, and west.",
       "x": 1,
-      "y": 0,
+      "y": 1,
+      "isLocked": false,
+      "passages": ["north","south","east","west"]
+    },
+    {
+      "id": "2,1",
+      "name": "Infirmary",
+      "description": "You enter into an infirmary. A strange sense of comfort overrides you. Then a thud.\nThere are exits to the north and east.",
+      "x": 2,
+      "y": 1,
       "isLocked": true,
-      "passages": ["north","south","west"]
+      "passages": ["north","south","east","west"]
     },
     {
       "id": "2,-1",
       "name": "Cafeteria",
-      "description": "You enter into a corporate cafeteria. One flickering light is all that allows you to see. You see a faint glimmer in the corner.\nThere are exits to the north and west.",
+      "description": "You enter into a corporate cafeteria. One flickering light is all that allows you to see. \nThere is an exit to the east.",
       "x": 2,
       "y": -1,
       "isLocked": false,
-      "passages": ["west"]
+      "passages": ["east"]
     }
   ]
 }
