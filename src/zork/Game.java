@@ -68,7 +68,6 @@ public class Game {
         e.printStackTrace();
       }
     }
-    System.out.println(ambNum);
   }
 
   private void milestoneCheck() {
