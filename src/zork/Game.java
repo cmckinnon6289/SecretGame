@@ -164,6 +164,16 @@ public class Game {
     } else if (commandWord.equals("take")) {
 
     }
+    else if(commandWord.equals("jump")){
+      System.out.println("You jumped up and down and did nothing");
+    }
+    else if(commandWord.equals("search")){
+       System.out.println("*****");
+    }
+    else if(commandWord.equals("run")){
+      goRoom(command);   }
+    else if(commandWord.equals("run")){
+      goRoom(command);   }
     return false;
   }
 
