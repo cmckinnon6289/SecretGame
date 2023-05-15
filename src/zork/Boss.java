@@ -1,8 +1,5 @@
 package zork;
 
-/**
- * Boss
- */
 public class Boss {
 
     public int hitPoints;

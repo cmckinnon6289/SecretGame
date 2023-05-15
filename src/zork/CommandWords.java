@@ -4,8 +4,7 @@ package zork;
 public class CommandWords {
     // a constant array that holds all valid command words
     private static final String[] VALID_COMMANDS = {
-            "go", "quit", "help", "eat", "get", "run", "grab", "jump", "forward",
-            "backward", "left", "right", "up", "down", "drink", "open", "close",
+            "go", "quit", "help", "eat", "get", "run", "grab", "up", "down", "drink", "open", "close",
             "look", "search", "strike", "fight", "rest", "heal", "north", "east",
             "west", "south", "exit", "attack", "find", "view", "pick up", "use"
     };
