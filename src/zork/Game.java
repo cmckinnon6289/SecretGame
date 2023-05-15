@@ -18,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 public class Game {
   public static int moves = 1;
   public static int HP = 10;
+  public static Boolean isFighting = false;
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
   public static ArrayList<Item> inventory = new ArrayList<Item>();
 
