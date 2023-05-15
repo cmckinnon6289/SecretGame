@@ -1,9 +1,15 @@
 package zork;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,20 +18,19 @@ import org.json.simple.parser.JSONParser;
 public class Game {
   public static int moves = 1;
   public static int HP = 10;
-  
+  public static Boolean isFighting = false;
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
+  public static ArrayList<Item> inventory = new ArrayList<Item>();
 
   private Parser parser;
   private static Room currentRoom;
-
+  
   /**
    * Create the game and initialise its internal map.
    */
   public Game() {
     try {
-      milestoneCheck();
-      initItems("src\\zork\\data\\items.json");
-      initRooms("src\\zork\\data\\rooms.json");
+      initGame();
       CoordKey initCoords = new CoordKey(0,0);
       currentRoom = roomMap.get(initCoords);
     } catch (Exception e) {
@@ -34,9 +39,43 @@ public class Game {
     parser = new Parser();
   }
 
+  private void initGame() throws Exception {
+    try {
+      initItems("src\\zork\\data\\items.json");
+      initRooms("src\\zork\\data\\rooms.json");
+      File bg = new File("src\\zork\\data\\sfx\\background.wav");
+      try {
+        AudioHandler.loopClip(bg);
+      } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+        e.printStackTrace();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void ambience() {
+    int ambNum = (int) (Math.round(Math.random()*25));
+    String path = null;
+    if (ambNum == 1) {
+      path = "src\\zork\\data\\sfx\\thud.wav";
+    } else if (ambNum == 9) {
+      path = "src\\zork\\data\\sfx\\gunfire.wav";
+    } else if (ambNum == 18) {
+      path = "src\\zork\\data\\sfx\\ghost.wav";
+    } if (path != null) {
+      File sfx = new File(path);
+      try {
+        AudioHandler.playClip(sfx);
+      } catch (IOException | UnsupportedAudioFileException | LineUnavailableException | InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
   private void milestoneCheck() {
     int increment = 14;
-    if (moves == increment+3) {
+    if (moves == increment) {
       System.out.println("-----");
       System.out.println("Your stomach pangs. When was your last meal?");
       System.out.println("-----");
@@ -66,14 +105,20 @@ public class Game {
       String roomDescription = (String) ((JSONObject) roomObj).get("description");
       CoordKey coords = new CoordKey(((Long) ((JSONObject) roomObj).get("x")).intValue(),((Long) ((JSONObject) roomObj).get("y")).intValue());
       Boolean isLocked = (Boolean) ((JSONObject) roomObj).get("isLocked");
+      String keyID = null;
+      if (isLocked) {
+        keyID = (String) ((JSONObject) roomObj).get("keyID");
+      }
       JSONArray passageJSON =((JSONArray)((JSONObject) roomObj).get("passages"));
       String[] passages = new String[passageJSON.size()];
       for (int i = 0; i < passageJSON.size(); i++) {
         passages[i] = (String) passageJSON.get(i);
       }
-
-      room.setRoomDetails(roomName, roomDescription, coords, passages, isLocked);
+      room.setRoomDetails(roomName, roomDescription, coords, passages, isLocked, keyID);
+      if (roomMap.containsKey(coords))
+        throw new DuplicateRoomException(coords);
       roomMap.put(coords, room);
+      room.setRoomItems(Item.getRoomItems(room));
     }
   }
 
@@ -95,7 +140,7 @@ public class Game {
       if (isKey) {
         // handle specially
       } else {
-        Item item = new Item(weight,itemName,openable); // ERROR HERE     
+        Item item = new Item(weight,itemName,openable,location);
       }
     }
   } 
@@ -105,20 +150,40 @@ public class Game {
    * Main play routine. Loops until end of play.
    */
   public void play() {
+    printHeadphoneWarning();
     printWelcome();
-
     boolean finished = false;
     while (!finished) {
       Command command;
+      moves++;
       try {
         command = parser.getCommand();
         finished = processCommand(command);
+        ambience();
+        milestoneCheck();
       } catch (IOException e) {
         e.printStackTrace();
       }
-
     }
     System.out.println("Thank you for playing. Good bye.");
+  }
+
+  private void printHeadphoneWarning() {
+    Scanner confirmer = new Scanner(System.in);
+    System.out.println("----------");
+    System.out.println("For the most immersive experience, we recommend wearing headphones.");
+    System.out.println("Please type \"continue\" below when you are ready to proceed.");
+    System.out.println("----------");
+    Boolean ready = false;
+    while (!ready) {
+      String confirm = confirmer.nextLine();
+      if (confirm.toLowerCase().equals("continue")) {
+        System.out.println("----------");
+        ready = true;
+      }
+      else
+        System.out.println("Invalid entry.");
+    }
   }
 
   /**
@@ -133,6 +198,11 @@ public class Game {
     System.out.println("but you don't want it to get any closer to you.");
     System.out.println();
     System.out.println("----------");
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     System.out.println("Welcome to the facility.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();
@@ -201,12 +271,9 @@ public class Game {
       System.out.println("In the confusion, you forgot to specify which direction you want to go in.");
       return;
     }
-
     String direction = command.getSecondWord();
-
     // Try to leave current room.
     Room nextRoom = currentRoom.nextRoom(direction);
-
     if (nextRoom == null)
       System.out.println("You cannot go that way.");
     else {

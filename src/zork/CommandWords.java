@@ -7,7 +7,7 @@ public class CommandWords {
             "go", "quit", "help", "eat", "get", "run", "grab", "jump", "forward",
             "backward", "left", "right", "up", "down", "drink", "open", "close",
             "look", "search", "strike", "fight", "rest", "heal", "north", "east",
-            "west", "south", "exit", "attack", "find", "view", "pick up"
+            "west", "south", "exit", "attack", "find", "view", "pick up", "use"
     };
 
     /**

@@ -39,6 +39,10 @@ public class CoordKey {
         }
     }
 
+    public String exceptionPrint() {
+        return Integer.toString(this.x)+","+Integer.toString(this.y);
+    }
+
     @Override
     public int hashCode(){
         int tmp = (y+((x+1)/2));
