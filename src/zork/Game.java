@@ -197,7 +197,7 @@ public class Game {
     System.out.println("Your compulsion to move overrides the excruciating pain. You don't know what made that thud,");
     System.out.println("but you don't want it to get any closer to you.");
     System.out.println();
-    System.out.println("----------");
+    System.out.println("---------------------------------------------------------------------------------------");
     try {
       Thread.sleep(3000);
     } catch (InterruptedException e) {
