@@ -105,16 +105,20 @@ public class Game {
       String roomDescription = (String) ((JSONObject) roomObj).get("description");
       CoordKey coords = new CoordKey(((Long) ((JSONObject) roomObj).get("x")).intValue(),((Long) ((JSONObject) roomObj).get("y")).intValue());
       Boolean isLocked = (Boolean) ((JSONObject) roomObj).get("isLocked");
+      String keyID = null;
+      if (isLocked) {
+        keyID = (String) ((JSONObject) roomObj).get("keyID");
+      }
       JSONArray passageJSON =((JSONArray)((JSONObject) roomObj).get("passages"));
       String[] passages = new String[passageJSON.size()];
       for (int i = 0; i < passageJSON.size(); i++) {
         passages[i] = (String) passageJSON.get(i);
       }
-
-      room.setRoomDetails(roomName, roomDescription, coords, passages, isLocked);
+      room.setRoomDetails(roomName, roomDescription, coords, passages, isLocked, keyID);
       if (roomMap.containsKey(coords))
         throw new DuplicateRoomException(coords);
       roomMap.put(coords, room);
+      room.setRoomItems(Item.getRoomItems(room));
     }
   }
 

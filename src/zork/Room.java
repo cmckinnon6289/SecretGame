@@ -8,6 +8,7 @@ public class Room {
   private String roomName;
   private String description;
   private Boolean isLocked;
+  private String keyID;
   private CoordKey coords;
   private ArrayList<String> passages;
   private ArrayList<Item> itemsInRoom = new ArrayList<Item>();
@@ -29,12 +30,14 @@ public class Room {
   public Room(String description) {
     this.description = description;
     passages = new ArrayList<String>();
+    keyID = null;
   }
 
   public Room() {
     roomName = "DEFAULT ROOM";
     description = "DEFAULT DESCRIPTION";
     passages = new ArrayList<String>();
+    keyID = null;
   }
 
   /**
@@ -122,20 +125,27 @@ public class Room {
 
   /**
    * Defines details of the room, including name, description, coordinates, and passageways.
-   * @param roomName
-   * @param description
-   * @param coordsArr
-   * @param passageArr
+   * @param roomName (String)
+   * @param description (String)
+   * @param coordsArr (CoordKey)
+   * @param passageArr (String[])
+   * @param locked (Boolean)
+   * @param keyID (String, only if locked)
   */
 
-  public void setRoomDetails(String roomName, String description, CoordKey coords, String[] passageArr, Boolean locked){
+  public void setRoomDetails(String roomName, String description, CoordKey coords, String[] passageArr, Boolean locked, String key){
     this.description = description;
     this.roomName = roomName;
     this.isLocked = locked;
     this.coords = coords;
+    this.keyID = key;
     for (String p : passageArr) {
       this.passages.add(p);
     }
+  }
+
+  public void setRoomItems(ArrayList<Item> items) {
+    this.itemsInRoom = items;
   }
 
   public String getDescription() {

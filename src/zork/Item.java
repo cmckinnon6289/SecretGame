@@ -41,7 +41,7 @@ public class Item extends OpenableObject {
     }
   }
 
-  public ArrayList<Item> getRoomItems(Room t) {
+  public static ArrayList<Item> getRoomItems(Room t) {
     try {
       return supplyRoster.get(t);
     } catch (Exception ex) {

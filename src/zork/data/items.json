@@ -1,10 +1,10 @@
 {
     "items": [
         {
-            "name": "tbd",
+            "name": "medkit",
             "x": -1,
-            "y": 3,
-            "weight": 0.5,
+            "y": 0,
+            "weight": 0.1,
             "openable": false,
             "isKey": false
         }

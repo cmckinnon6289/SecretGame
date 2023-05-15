@@ -12,5 +12,12 @@ public class Lantern extends Item {
         this.lanternIsOpenable = isOpenable;
         this.lanternCurrentRoom = currentRoom;
     }
-    
+    public void use() {
+        System.out.print("The lantern gives off weak light. ");
+        if (Item.getRoomItems(lanternCurrentRoom) != null) {
+            System.out.println("SOmething glimmers in the corner in the room.");
+        } else {
+            System.out.println("Nothing catches your eye.");
+        }
+    }
 }
