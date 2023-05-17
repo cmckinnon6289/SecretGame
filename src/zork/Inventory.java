@@ -29,5 +29,14 @@ public class Inventory {
       return false;
     }
   }
+  public boolean removeItem(Item item){
+    if(items.contains(item)){
+    return items.remove(item);
+    }
+    else{
+    System.out.println("You do not have that item, so you cannot remove it");
+    return false;
+    }
+  }
 
 }
