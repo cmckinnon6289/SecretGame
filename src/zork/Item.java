@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Item extends OpenableObject {
-  private Double weight;
+  public int weight;
   private String name;
   private boolean isOpenable;
   public static HashMap<Room,ArrayList<Item>> supplyRoster = new HashMap<Room,ArrayList<Item>>();
 
-  public Item(Double weight, String name, boolean isOpenable, Room location) {
+  public Item(int weight, String name, boolean isOpenable, Room location) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
@@ -17,7 +17,7 @@ public class Item extends OpenableObject {
   }
 
   public Item() {
-    this.weight = 0.0;
+    this.weight = 0;
     this.name = "DEFAULT ITEM";
     this.isOpenable = false;
     CoordKey t = new CoordKey(0,0);
@@ -60,11 +60,11 @@ public class Item extends OpenableObject {
     }
   }
 
-  public Double getWeight() {
+  public int getWeight() {
     return weight;
   }
 
-  public void setWeight(Double weight) {
+  public void setWeight(int weight) {
     this.weight = weight;
   }
 
