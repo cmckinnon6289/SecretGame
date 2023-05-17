@@ -22,6 +22,14 @@ public class Room {
   public void setExits(ArrayList<String> newPassages) {
     this.passages = newPassages;
   }
+  public void addItem(Item item){
+    itemsInRoom.add(item);
+  }
+  // public void setInventory(HashMap itemsList){
+  //   for (int i = 0; i < itemsList.size(); i++) {
+  //     Inventory.addItem(itemsList[i])
+  //   }
+  // }
 
   /**
    * Create a room described "description". Initially, it has no exits.
@@ -45,7 +53,7 @@ public class Room {
    * constructor).
    */
   public String description() {
-    return "Room: " + roomName + "\n\n" + description;
+    return "Room: " + roomName + "\n\n" + description + "\n" + itemsInRoom;
   }
 
   /**
