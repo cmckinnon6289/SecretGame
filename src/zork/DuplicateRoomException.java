@@ -1,4 +1,4 @@
-package zork;
+ package zork;
 
 public class DuplicateRoomException extends Exception {
     public DuplicateRoomException() {
@@ -12,3 +12,4 @@ public class DuplicateRoomException extends Exception {
         System.exit(-1);
     }
 }
+
