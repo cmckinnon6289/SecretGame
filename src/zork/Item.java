@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Item extends OpenableObject {
   public int weight;
-  private String name;
+  public String name;
   private boolean isOpenable;
   public static HashMap<Room,ArrayList<Item>> supplyRoster = new HashMap<Room,ArrayList<Item>>();
 
@@ -15,19 +15,6 @@ public class Item extends OpenableObject {
     this.isOpenable = isOpenable;
     this.place(location);
   }
-
-  public Item() {
-    this.weight = 0;
-    this.name = "DEFAULT ITEM";
-    this.isOpenable = false;
-    CoordKey t = new CoordKey(0,0);
-    this.place(Game.roomMap.get(t));
-  }
-
-/**
-   * Adds an item to a HashMap of items. Each room with items has an {@code ArrayList<Item>} with all the items in the room. Checks whether the Room already has an entry in the {@code HashMap<Room, ArrayList<Item>> supplyRoster} and reacts accordingly.
-   * @param key (Room)
-  */
 
   public void place(Room key) {
     if (supplyRoster.containsKey(key)) {
@@ -70,10 +57,6 @@ public class Item extends OpenableObject {
 
   public String getName() {
     return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 
   public boolean isOpenable() {

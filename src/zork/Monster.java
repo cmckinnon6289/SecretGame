@@ -2,17 +2,25 @@ package zork;
 
 public class Monster {
     private String name;
-    int health;
+    private int health;
     private int attackDamage;
 
-    // Constructor with name, health, and attackDamage
     public Monster(String name, int health, int attackDamage) {
         this.name = name;
         this.health = health;
         this.attackDamage = attackDamage;
     }
 
-    // Getter methods
+    public void attacked(int damage){
+        health -= damage; 
+    }
+
+    public void strikePlayer() {
+        int damage = (int)(Math.random()* attackDamage) + 1;
+        Game.HP -= damage; 
+        System.out.println(name + " striked you for " + damage + " damages."); 
+    }
+
     public String getName() {
         return name;
     }

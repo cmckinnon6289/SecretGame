@@ -13,20 +13,20 @@ public class Inventory {
   }
 
   public int getMaxWeight() {
-    return maxWeight;
+    return MAXWEIGHT; 
   }
 
   public int getCurrentWeight() {
     int weight = 0; 
     for (int i = 0; i < items.size(); i++) {
       Item current = items.get(i); 
-      weight += Items.getWeight; 
+      weight += current.getWeight();    
     }
     return weight;
   }
 
   public boolean addItem(Item item) {
-    if (item.getWeight() + currentWeight <= maxWeight)
+    if (item.getWeight() + currentWeight <= MAXWEIGHT)
       return items.add(item);
     else {
       System.out.println("There is no room to add the item.");

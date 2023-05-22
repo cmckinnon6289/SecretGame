@@ -3,12 +3,11 @@ package zork;
 public class weapons extends Item {
 
     private int damage; 
-    private String weapon; 
 
-    public weapons(String weapon, int damage, int weight){
-        this.weapon = weapon;
+    public weapons(int damage, int weight, String name, boolean isOpenable, Room location){
+        super(weight, name, isOpenable, location);
         this.damage = damage; 
-        this.weight = weight; 
+        this.weight = weight;  
     }
 
     public int getDamage(){
@@ -16,20 +15,11 @@ public class weapons extends Item {
     } 
 
     public String getWeapon(){
-        return weapon;   
+        return name;   
     } 
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public void setName(String weapon) {
-        this.weapon = weapon;
-    }
-
-    // Other methods
     public void attack() {
-        System.out.println("Attacking with " + weapon + ", dealing " + damage + " damage!");
+        System.out.println("Attacking with " + name + ", dealing " + damage + " damage!");
     }
     
 }

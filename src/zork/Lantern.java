@@ -1,19 +1,28 @@
 package zork;
 
 public class Lantern extends Item {
-   boolean isOn;
-   Room lanternRoom;
-    public Lantern(double weight, String name, boolean isOpenable, boolean isOn, Room currentRoom){
-        super(weight, name, isOpenable, currentRoom);
+
+   public boolean isOn;
+
+   public Lantern(int weight, boolean isOn, String name, boolean isOpenable, Room location){
+        super(weight, name, isOpenable, location); 
         this.isOn = isOn;
-        this.lanternRoom = currentRoom;
+        this.weight = weight; 
+        this.name = "lantern";
     }
-    public void use() {
-        System.out.print("The lantern gives off weak light. ");
-        if (Item.getRoomItems(lanternRoom) != null) {
-            System.out.println("Something glimmers in the corner in the room.");
-        } else {
-            System.out.println("Nothing catches your eye.");
-        }
+
+    public boolean isLanternON(){
+        return isOn; 
+    }
+
+    public void lightUp(){
+        isOn = true; 
+    }
+
+    public void useLantern() {
+        if(isOn == true)
+          System.out.print("The lantern gives off weak light. ");
+        else if(isOn == false)
+          System.out.println("The lantern is not on");
     }
 }
