@@ -12,7 +12,6 @@ public class Room {
   private CoordKey coords;
   private ArrayList<String> passages;
   private ArrayList<Item> itemsInRoom = new ArrayList<Item>();
-
   public static HashMap<Room,ArrayList<Item>> itemsList = new HashMap<Room,ArrayList<Item>>();
 
   public ArrayList<String> getPassages() {
@@ -22,6 +21,7 @@ public class Room {
   public void setExits(ArrayList<String> newPassages) {
     this.passages = newPassages;
   }
+  
   public void addItem(Item item){
     itemsInRoom.add(item);
   }

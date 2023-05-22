@@ -4,7 +4,7 @@
             "name": "medkit",
             "x": -1,
             "y": 0,
-            "weight": 0.1,
+            "weight": 5,
             "openable": false,
             "isKey": false
         },
@@ -12,7 +12,7 @@
             "name": "Lantern",
             "x": 0, 
             "y": 0,
-            "weight": 0.5, 
+            "weight": 5, 
             "openable": false,
             "isKey": false
         }

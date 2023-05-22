@@ -132,7 +132,7 @@ public class Game {
 
     for (Object itemObj : jsonItems) {
       String itemName = (String) ((JSONObject) itemObj).get("name");
-      Double weight = (Double) ((JSONObject) itemObj).get("weight");
+      int weight = (int) ((JSONObject) itemObj).get("weight"); 
       Boolean openable = (Boolean) ((JSONObject) itemObj).get("openable");
       Boolean isKey = (Boolean) ((JSONObject) itemObj).get("isKey");
       CoordKey locationKey = new CoordKey(((Long) ((JSONObject) itemObj).get("x")).intValue(),((Long) ((JSONObject) itemObj).get("y")).intValue());
