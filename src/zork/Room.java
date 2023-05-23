@@ -9,7 +9,7 @@ public class Room {
   private String description;
   private Boolean isLocked;
   private String keyID;
-  private CoordKey coords;
+  private final CoordKey coords;
   private ArrayList<String> passages;
   private ArrayList<Item> itemsInRoom = new ArrayList<Item>();
   public static HashMap<Room,ArrayList<Item>> itemsList = new HashMap<Room,ArrayList<Item>>();
