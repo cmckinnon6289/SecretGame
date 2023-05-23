@@ -44,4 +44,4 @@ public class OpenableObject {
   public void setOpen(boolean isOpen) {
     this.isOpen = isOpen;
   }
-}
+} 
