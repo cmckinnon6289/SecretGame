@@ -229,19 +229,21 @@ public class Game {
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equals("eat")) {
+    } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
       System.out.println("Crumbs fall out of your pocket and disappear just as quickly.");
-    } else if (commandWord.equals("take")) {
-
-    }
+    } else if(commandWord.equals("eat") && command.hasSecondWord()){
+      Game.HP += command.getSecondWord().healValue;
+    } 
+    else if (commandWord.equals("take") && command.hasSecondWord()) {
+      
+      }
+    
     else if(commandWord.equals("jump")){
-      System.out.println("You jumped up and down and did nothing");
+      System.out.println("Well done, you exercised your legs");
     }
     else if(commandWord.equals("search")){
        System.out.println("*****");
     }
-    else if(commandWord.equals("run")){
-      goRoom(command);   }
     else if(commandWord.equals("run")){
       goRoom(command);   }
     return false;

@@ -1,4 +1,5 @@
 package zork;
+import java.util.ArrayList;
 
 public class Lantern extends Item {
 
@@ -20,16 +21,19 @@ public class Lantern extends Item {
     }
 
     public void useLantern() {
-        if(isOn == true)
+        
+        if(isOn == true){
           System.out.print("The lantern gives off weak light. ");
           ArrayList<Item> items = Item.getRoomItems(Game.getCurrentRoom());
           if (items != null) {
-             System.out.print("You see: "
-             items.forEach((item) -> if (!item.isMonster) {System.out.println(item+", ")});
-             System.out.println("and nothing else.")
-          } else {
+             System.out.print("You see: ");
+             items.forEach((item) -> {{System.out.println(item+", ");}});
+             System.out.println("and nothing else.");
+          } else 
              System.out.println("You see nothing of value in the room.");
+        }
         else if(isOn == false)
           System.out.println("The lantern is not on");
+        }
     }
-}
+
