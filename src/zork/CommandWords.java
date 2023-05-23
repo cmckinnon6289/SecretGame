@@ -9,7 +9,7 @@ public class CommandWords {
             "west", "south", "exit", "attack", "pick up", };
 
    
-    public static boolean isCommand(String aString) {
+    public boolean isCommand(String aString) {
         for (String c : VALID_COMMANDS) {
             if (c.equalsIgnoreCase(aString))
                 return true;
@@ -25,7 +25,7 @@ public class CommandWords {
         return null;
     }
 
-    public static void showAll() {
+    public void showAll() {
         for (String c : VALID_COMMANDS) {
             System.out.print(c + "  ");
         }

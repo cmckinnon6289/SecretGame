@@ -2,19 +2,62 @@
     "items": [
         {
             "name": "medkit",
-            "x": -1,
-            "y": 0,
+            "x": null,
+            "y": null,
+            "weight": 5,
+            "openable": false,
+            "isKey": false
+        },
+        {
+            "name": "medkit",
+            "x": null,
+            "y": null,
             "weight": 5,
             "openable": false,
             "isKey": false
         },
         {
             "name": "Lantern",
-            "x": 0, 
-            "y": 0,
+            "x": null, 
+            "y": null,
             "weight": 5, 
             "openable": false,
             "isKey": false
+        },
+        {
+            "name": "Sword",
+            "x": null, 
+            "y": null,
+            "weight": 10, 
+            "openable": false,
+            "isKey": false
+        },
+        {
+            "name": "Bread",
+            "x": null, 
+            "y": null,
+            "weight": 5, 
+            "openable": false,
+            "isKey": false
+        },
+
+        {
+            "name": "sling shot",
+            "x": null, 
+            "y": null,
+            "weight": 5, 
+            "openable": false,
+            "isKey": false
+        },
+        {
+            "name": "monster",
+            "x": null, 
+            "y": null,
+            "weight": 1000, 
+            "openable": false,
+            "isKey": false,
+            "isMonster": true
         }
+
     ]
 }

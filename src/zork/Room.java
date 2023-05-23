@@ -159,4 +159,16 @@ public class Room {
   public String getDescription() {
     return description;
   }
+
+  public boolean matchKey(String keyid){
+    if(keyid.equals(getKeyId()))
+     return true;  
+    else 
+      return false;  
+  }
+
+  private Object getKeyId() {
+    return keyID; 
+  }
+
 }

@@ -3,7 +3,8 @@ package zork;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class Item extends OpenableObject {
+public class Item extends OpenableObject { 
+
   public int weight;
   public String name;
   private boolean isOpenable;
@@ -12,8 +13,16 @@ public class Item extends OpenableObject {
   public Item(int weight, String name, boolean isOpenable, Room location) {
     this.weight = weight;
     this.name = name;
-    this.isOpenable = isOpenable;
+    this.isOpenable = isOpenable; 
     this.place(location);
+  } 
+
+  public static ArrayList<Item> getRoomItems(Room t) {
+    try {
+      return supplyRoster.get(t);
+    } catch (Exception ex) {
+      return null;
+    }
   }
 
   public void place(Room key) {
@@ -28,17 +37,9 @@ public class Item extends OpenableObject {
     }
   }
 
-  public static ArrayList<Item> getRoomItems(Room t) {
-    try {
-      return supplyRoster.get(t);
-    } catch (Exception ex) {
-      return null;
-    }
-  }
-
   public void open() {
     if (!isOpenable) {
-      if (!super.isLocked())
+      if (!isLocked())   
         System.out.println(this.name + " isn't something you can open.");
       else
         System.out.println("The key hole catches your eye as you fail to open it.");
@@ -46,6 +47,7 @@ public class Item extends OpenableObject {
 
     }
   }
+
 
   public int getWeight() {
     return weight;
@@ -77,3 +79,4 @@ public class Item extends OpenableObject {
   }
 
 }
+
