@@ -9,8 +9,8 @@ public class CommandWords {
             "west", "south", "exit", "attack", "pick up", };
 
    
-    public static boolean isCommand(String aString) {
-        for (String c : VALID_COMMANDS) {
+    public boolean isCommand(String aString) { 
+        for (String c : VALID_COMMANDS) { 
             if (c.equalsIgnoreCase(aString))
                 return true;
         }
@@ -19,7 +19,7 @@ public class CommandWords {
 
     public String getLowerCaseForm(String input) {
         String lowerCase = input.toLowerCase();
-        if (isCommand(lowerCase)) {
+        if (isCommand(lowerCase)) { 
             return lowerCase;
         }
         return null;
