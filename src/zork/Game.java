@@ -17,10 +17,9 @@ import org.json.simple.parser.JSONParser;
 
 public class Game {
   public static int moves = 1;
-  public static int HP = 10;
-  public static Boolean isFighting = false;
+  public static int HP = 10; 
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
-  public static ArrayList<Item> inventory = new ArrayList<Item>();
+  public static ArrayList<Item> inventory = new ArrayList<Item>(); 
 
   private Parser parser;
   private static Room currentRoom;
@@ -138,9 +137,9 @@ public class Game {
       CoordKey locationKey = new CoordKey(((Long) ((JSONObject) itemObj).get("x")).intValue(),((Long) ((JSONObject) itemObj).get("y")).intValue());
       Room location = roomMap.get(locationKey);
       if (isKey) {
-        // handle specially
+        // handle specially 
       } else {
-        Item item = new Item(weight,itemName,openable,location);
+        new Item(weight,itemName,openable,location);
       }
     }
   } 
@@ -169,20 +168,21 @@ public class Game {
   }
 
   private void printHeadphoneWarning() {
-    Scanner confirmer = new Scanner(System.in);
-    System.out.println("----------");
-    System.out.println("For the most immersive experience, we recommend wearing headphones.");
-    System.out.println("Please type \"continue\" below when you are ready to proceed.");
-    System.out.println("----------");
-    Boolean ready = false;
-    while (!ready) {
-      String confirm = confirmer.nextLine();
-      if (confirm.toLowerCase().equals("continue")) {
-        System.out.println("----------");
-        ready = true;
+    try (Scanner confirmer = new Scanner(System.in)) {
+      System.out.println("----------");
+      System.out.println("For the most immersive experience, we recommend wearing headphones.");
+      System.out.println("Please type \"continue\" below when you are ready to proceed.");
+      System.out.println("----------");
+      Boolean ready = false;
+      while (!ready) {
+        String confirm = confirmer.nextLine();
+        if (confirm.toLowerCase().equals("continue")) {
+          System.out.println("----------");
+          ready = true;
+        }
+        else
+          System.out.println("Invalid entry.");
       }
-      else
-        System.out.println("Invalid entry.");
     }
   }
 
@@ -229,21 +229,19 @@ public class Game {
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
+    } else if (commandWord.equals("eat")) {
       System.out.println("Crumbs fall out of your pocket and disappear just as quickly.");
-    } else if(commandWord.equals("eat") && command.hasSecondWord()){
-      Game.HP += command.getSecondWord().healValue;
-    } 
-    else if (commandWord.equals("take") && command.hasSecondWord()) {
-      
-      }
-    
+    } else if (commandWord.equals("take")) {
+
+    }
     else if(commandWord.equals("jump")){
-      System.out.println("Well done, you exercised your legs");
+      System.out.println("You jumped up and down and did nothing");
     }
     else if(commandWord.equals("search")){
        System.out.println("*****");
     }
+    else if(commandWord.equals("run")){
+      goRoom(command);   }
     else if(commandWord.equals("run")){
       goRoom(command);   }
     return false;
