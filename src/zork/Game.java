@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.UnsupportedAudioFileException; 
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,10 +17,10 @@ import org.json.simple.parser.JSONParser;
 
 public class Game {
   public static int moves = 1;
-  public static int HP = 10;
-  public static Boolean isFighting = false;
+  public static int HP = 20; 
+  public static final int MAXHP = 20; 
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
-  public static ArrayList<Item> inventory = new ArrayList<Item>();
+  public static ArrayList<Item> inventory = new ArrayList<Item>(); 
 
   private Parser parser;
   private static Room currentRoom;
@@ -54,6 +54,10 @@ public class Game {
     }
   }
 
+  public static void checkHP(){
+    if(HP > MAXHP)
+      HP = MAXHP;
+  }
   private void ambience() {
     int ambNum = (int) (Math.round(Math.random()*25));
     String path = null;
@@ -132,15 +136,15 @@ public class Game {
 
     for (Object itemObj : jsonItems) {
       String itemName = (String) ((JSONObject) itemObj).get("name");
-      Double weight = (Double) ((JSONObject) itemObj).get("weight");
+      int weight = (int) ((JSONObject) itemObj).get("weight"); 
       Boolean openable = (Boolean) ((JSONObject) itemObj).get("openable");
       Boolean isKey = (Boolean) ((JSONObject) itemObj).get("isKey");
       CoordKey locationKey = new CoordKey(((Long) ((JSONObject) itemObj).get("x")).intValue(),((Long) ((JSONObject) itemObj).get("y")).intValue());
       Room location = roomMap.get(locationKey);
       if (isKey) {
-        // handle specially
+        // handle specially 
       } else {
-        Item item = new Item(weight,itemName,openable,location);
+        new Item(weight,itemName,openable,location);
       }
     }
   } 
@@ -169,20 +173,21 @@ public class Game {
   }
 
   private void printHeadphoneWarning() {
-    Scanner confirmer = new Scanner(System.in);
-    System.out.println("----------");
-    System.out.println("For the most immersive experience, we recommend wearing headphones.");
-    System.out.println("Please type \"continue\" below when you are ready to proceed.");
-    System.out.println("----------");
-    Boolean ready = false;
-    while (!ready) {
-      String confirm = confirmer.nextLine();
-      if (confirm.toLowerCase().equals("continue")) {
-        System.out.println("----------");
-        ready = true;
+    try (Scanner confirmer = new Scanner(System.in)) {
+      System.out.println("----------");
+      System.out.println("For the most immersive experience, we recommend wearing headphones.");
+      System.out.println("Please type \"continue\" below when you are ready to proceed.");
+      System.out.println("----------");
+      Boolean ready = false;
+      while (!ready) {
+        String confirm = confirmer.nextLine();
+        if (confirm.toLowerCase().equals("continue")) {
+          System.out.println("----------");
+          ready = true;
+        }
+        else
+          System.out.println("Invalid entry.");
       }
-      else
-        System.out.println("Invalid entry.");
     }
   }
 
@@ -197,7 +202,7 @@ public class Game {
     System.out.println("Your compulsion to move overrides the excruciating pain. You don't know what made that thud,");
     System.out.println("but you don't want it to get any closer to you.");
     System.out.println();
-    System.out.println("----------");
+    System.out.println("---------------------------------------------------------------------------------------");
     try {
       Thread.sleep(3000);
     } catch (InterruptedException e) {
@@ -229,15 +234,45 @@ public class Game {
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equals("eat")) {
-      System.out.println("Crumbs fall out of your pocket and disappear just as quickly.");
-    } else if (commandWord.equals("take")) {
+    if (commandWord.equals("take")) {
 
     }
+    } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
+      System.out.println("Eat what?");
+    } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("sandwich")){
+      Game.HP += 5;
+      Game.checkHP();
+      System.out.println("You ate your sandwich, bringing your health back up to " + Game.getHP());
+      Inventory.removeItem(sandwich); 
+    }else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("apple")){
+      Game.HP += 1;
+      Game.checkHP();
+      System.out.println("You ate an apple, restoring your health by 1, your health is now at " + Game.getHP());
+      Inventory.removeItem(apple);
+    } else if(commandWord.equals("eat") && command.hasSecondWord())
+      System.out.println("You cannot eat a " + command.getSecondWord());
+    else if (commandWord.equals("take") && command.hasSecondWord()) {
+      
+      }
+    
+    else if(commandWord.equals("jump")){
+      System.out.println("You jumped up and down and did nothing");
+    }
+    else if(commandWord.equals("search")){
+       System.out.println("*****");
+    }
+    else if(commandWord.equals("run")){
+      goRoom(command);   }
+    else if(commandWord.equals("run")){
+      goRoom(command);   }
     return false;
   }
 
   // implementations of user commands:
+
+  private static int getHP() {
+    return HP; 
+  }
 
   /**
    * Print out some help information. Here we print some stupid, cryptic message

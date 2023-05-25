@@ -9,10 +9,9 @@ public class Room {
   private String description;
   private Boolean isLocked;
   private String keyID;
-  private CoordKey coords;
+  private CoordKey coords; 
   private ArrayList<String> passages;
   private ArrayList<Item> itemsInRoom = new ArrayList<Item>();
-
   public static HashMap<Room,ArrayList<Item>> itemsList = new HashMap<Room,ArrayList<Item>>();
 
   public ArrayList<String> getPassages() {
@@ -22,12 +21,21 @@ public class Room {
   public void setExits(ArrayList<String> newPassages) {
     this.passages = newPassages;
   }
+  
+  public void addItem(Item item){ 
+    itemsInRoom.add(item);
+  }
+  // public void setInventory(HashMap itemsList){
+  //   for (int i = 0; i < itemsList.size(); i++) {
+  //     Inventory.addItem(itemsList[i])
+  //   }
+  // }
 
   /**
    * Create a room described "description". Initially, it has no exits.
    * "description" is something like "a kitchen" or "an open court yard".
    */
-  public Room(String description) {
+  public Room(String description) {  
     this.description = description;
     passages = new ArrayList<String>();
     keyID = null;
@@ -45,7 +53,7 @@ public class Room {
    * constructor).
    */
   public String description() {
-    return "Room: " + roomName + "\n\n" + description;
+    return "Room: " + roomName + "\n\n" + description + "\n" + itemsInRoom;
   }
 
   /**
@@ -137,7 +145,7 @@ public class Room {
     this.description = description;
     this.roomName = roomName;
     this.isLocked = locked;
-    this.coords = coords;
+    this.coords = coords; 
     this.keyID = key;
     for (String p : passageArr) {
       this.passages.add(p);
@@ -151,4 +159,16 @@ public class Room {
   public String getDescription() {
     return description;
   }
+
+  public boolean matchKey(String keyid){
+    if(keyid.equals(getKeyId()))
+     return true;  
+    else 
+      return false;  
+  }
+
+  private Object getKeyId() {
+    return keyID; 
+  }
+
 }

@@ -4,29 +4,42 @@ import java.util.ArrayList;
 
 public class Inventory {
   private ArrayList<Item> items;
-  private int maxWeight;
+  private final int MAXWEIGHT = 100;
   private int currentWeight;
 
-  public Inventory(int maxWeight) {
+  public Inventory() {
     this.items = new ArrayList<Item>();
-    this.maxWeight = maxWeight;
-    this.currentWeight = 0;
+    this.currentWeight = getCurrentWeight();
   }
 
   public int getMaxWeight() {
-    return maxWeight;
+    return MAXWEIGHT; 
   }
 
   public int getCurrentWeight() {
-    return currentWeight;
+    int weight = 0; 
+    for (int i = 0; i < items.size(); i++) {
+      Item current = items.get(i); 
+      weight += current.getWeight();    
+    }
+    return weight;
   }
 
   public boolean addItem(Item item) {
-    if (item.getWeight() + currentWeight <= maxWeight)
+    if (item.getWeight() + currentWeight <= MAXWEIGHT)
       return items.add(item);
     else {
       System.out.println("There is no room to add the item.");
       return false;
+    }
+  }
+  public boolean removeItem(Item item){
+    if(items.contains(item)){
+    return items.remove(item);
+    }
+    else{
+    System.out.println("You do not have that item, so you cannot remove it");
+    return false;
     }
   }
 

@@ -1,4 +1,4 @@
-package zork;
+ package zork;
 
 public class RoomStateException extends Exception {
     public RoomStateException() {
@@ -12,3 +12,4 @@ public class RoomStateException extends Exception {
         System.exit(-1);
     }
 }
+
