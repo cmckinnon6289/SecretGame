@@ -9,12 +9,12 @@ public class CommandWords {
             "west", "south", "exit", "attack", "pick up", };
 
    
-    public boolean isCommand(String aString) {
+    public static boolean isCommand(String aString) {
         for (String c : VALID_COMMANDS) {
             if (c.equalsIgnoreCase(aString))
                 return true;
         }
-        return false;
+        return false; 
     }
 
     public static String getLowerCaseForm(String input) {
