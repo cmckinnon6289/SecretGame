@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Parser {
   private CommandWords commands; // holds all valid command words
-  private Scanner in;
+  public static Scanner in;
 
   public Parser() {
     commands = new CommandWords();

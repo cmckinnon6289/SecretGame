@@ -75,7 +75,7 @@
     {
       "id": "0,0",
       "name": "Red Circle Room",
-      "description": "There's a red circle on the wall.\nThere are exits to the east and west.\n There is a lantern next to you.",
+      "description": "There's a red circle on the wall.\nThere are exits to the east and west.\nThere is a lantern next to you.",
       "x": 0,
       "y": 0,
       "isLocked": false,

@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException; 
@@ -120,7 +119,7 @@ public class Game {
       }
       room.setRoomDetails(roomName, roomDescription, coords, passages, isLocked, keyID);
       if (roomMap.containsKey(coords))
-        throw new DuplicateRoomException(coords);
+        throw new RoomStateException(coords);
       roomMap.put(coords, room);
       room.setRoomItems(Item.getRoomItems(room));
     }
@@ -136,7 +135,7 @@ public class Game {
 
     for (Object itemObj : jsonItems) {
       String itemName = (String) ((JSONObject) itemObj).get("name");
-      int weight = (int) ((JSONObject) itemObj).get("weight"); 
+      int weight = ((Long) ((JSONObject) itemObj).get("weight")).intValue(); 
       Boolean openable = (Boolean) ((JSONObject) itemObj).get("openable");
       Boolean isKey = (Boolean) ((JSONObject) itemObj).get("isKey");
       CoordKey locationKey = new CoordKey(((Long) ((JSONObject) itemObj).get("x")).intValue(),((Long) ((JSONObject) itemObj).get("y")).intValue());
@@ -173,14 +172,13 @@ public class Game {
   }
 
   private void printHeadphoneWarning() {
-    try (Scanner confirmer = new Scanner(System.in)) {
       System.out.println("----------");
       System.out.println("For the most immersive experience, we recommend wearing headphones.");
       System.out.println("Please type \"continue\" below when you are ready to proceed.");
       System.out.println("----------");
       Boolean ready = false;
       while (!ready) {
-        String confirm = confirmer.nextLine();
+        String confirm = Parser.in.nextLine();
         if (confirm.toLowerCase().equals("continue")) {
           System.out.println("----------");
           ready = true;
@@ -188,7 +186,6 @@ public class Game {
         else
           System.out.println("Invalid entry.");
       }
-    }
   }
 
   /**
@@ -243,12 +240,12 @@ public class Game {
       Game.HP += 5;
       Game.checkHP();
       System.out.println("You ate your sandwich, bringing your health back up to " + Game.getHP());
-      Inventory.removeItem(sandwich); 
+      //Inventory.removeItem(sandwich); 
     }else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("apple")){
       Game.HP += 1;
       Game.checkHP();
       System.out.println("You ate an apple, restoring your health by 1, your health is now at " + Game.getHP());
-      Inventory.removeItem(apple);
+      //Inventory.removeItem(apple);
     } else if(commandWord.equals("eat") && command.hasSecondWord())
       System.out.println("You cannot eat a " + command.getSecondWord());
     else if (commandWord.equals("take") && command.hasSecondWord()) {
