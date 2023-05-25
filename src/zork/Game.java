@@ -17,7 +17,8 @@ import org.json.simple.parser.JSONParser;
 
 public class Game {
   public static int moves = 1;
-  public static int HP = 10; 
+  public static int HP = 20; 
+  public static final int MAXHP = 20; 
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
   public static ArrayList<Item> inventory = new ArrayList<Item>(); 
 
@@ -53,6 +54,10 @@ public class Game {
     }
   }
 
+  public static void checkHP(){
+    if(HP > MAXHP)
+      HP = MAXHP;
+  }
   private void ambience() {
     int ambNum = (int) (Math.round(Math.random()*25));
     String path = null;
@@ -236,11 +241,14 @@ public class Game {
       System.out.println("Eat what?");
     } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("sandwich")){
       Game.HP += 5;
+      Game.checkHP();
       System.out.println("You ate your sandwich, bringing your health back up to " + Game.getHP());
       Inventory.removeItem(sandwich);
     }else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("apple")){
       Game.HP += 1;
+      Game.checkHP();
       System.out.println("You ate an apple, restoring your health by 1, your health is now at " + Game.getHP());
+      Inventory.removeItem(apple);
     } else if(commandWord.equals("eat") && command.hasSecondWord())
       System.out.println("You cannot eat a " + command.getSecondWord());
     else if (commandWord.equals("take") && command.hasSecondWord()) {
