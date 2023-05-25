@@ -229,11 +229,24 @@ public class Game {
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equals("eat")) {
-      System.out.println("Crumbs fall out of your pocket and disappear just as quickly.");
-    } else if (commandWord.equals("take")) {
+    if (commandWord.equals("take")) {
 
     }
+    } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
+      System.out.println("Eat what?");
+    } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("sandwich")){
+      Game.HP += 5;
+      System.out.println("You ate your sandwich, bringing your health back up to " + Game.getHP());
+      Inventory.removeItem(sandwich);
+    }else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("apple")){
+      Game.HP += 1;
+      System.out.println("You ate an apple, restoring your health by 1, your health is now at " + Game.getHP());
+    } else if(commandWord.equals("eat") && command.hasSecondWord())
+      System.out.println("You cannot eat a " + command.getSecondWord());
+    else if (commandWord.equals("take") && command.hasSecondWord()) {
+      
+      }
+    
     else if(commandWord.equals("jump")){
       System.out.println("You jumped up and down and did nothing");
     }

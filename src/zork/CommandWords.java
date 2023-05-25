@@ -17,7 +17,7 @@ public class CommandWords {
         return false;
     }
 
-    public static String getLowerCaseForm(String input) {
+    public String getLowerCaseForm(String input) {
         String lowerCase = input.toLowerCase();
         if (isCommand(lowerCase)) {
             return lowerCase;

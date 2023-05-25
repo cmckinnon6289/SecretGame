@@ -36,7 +36,7 @@ public class Monster {
     }
 
     public void killed(){
-        System.out.println("you are killed by the monster");
+        System.out.println("You have been killed by the monster");
     }
 
     public void monsterDead(){
