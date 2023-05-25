@@ -1,13 +1,31 @@
 {
   "rooms": [
     {
-      "id": "-1,2",
-      "name": "Crying",
-      "description": "There's blood on the west wall. You hear faint crying to the south. It sounds human.\nThere are exits to the south and east.",
-      "x": -1,
-      "y": 2,
+      "id": "-2,-2",
+      "name": "Armoury",
+      "description": "You enter into a room for security guards. Too bad about them.\nBlack goo oozes from the ceiling. Hoarse breathing calls to you.\nThere is one exit to the east.",
+      "x": -2,
+      "y": -2,
       "isLocked": false,
-      "passages": ["south","east"]
+      "passages": ["east"]
+    },
+    {
+      "id": "-1,-2",
+      "name": "Unknown",
+      "description": "There's nothing special here.\nThere are exits to the north, east, and west.",
+      "x": -1,
+      "y": -2,
+      "isLocked": false,
+      "passages": ["north","east","west"]
+    },
+    {
+      "id": "-1,-1",
+      "name": "Unknown",
+      "description": "There's nothing special here.\nThere are exits to the north, south, and east.",
+      "x": -1,
+      "y": -1,
+      "isLocked": false,
+      "passages": ["north","south","east"]
     },
     {
       "id": "-1,0",
@@ -19,6 +37,42 @@
       "passages": ["north","south","east"]
     },
     {
+      "id": "key2",
+      "name": "Boss fight",
+      "description": "What is that thing?\nThere are exits to the north, east, and south.\nYou can't leave until you fight it.",
+      "x": -1,
+      "y": 1,
+      "isLocked": true,
+      "passages": ["north","south","east"]
+    },
+    {
+      "id": "-1,2",
+      "name": "Crying",
+      "description": "There's blood on the west wall. You hear faint crying to the south. It sounds human.\nThere are exits to the south and east.",
+      "x": -1,
+      "y": 2,
+      "isLocked": false,
+      "passages": ["south","east"]
+    },
+    {
+      "id": "0,-2",
+      "name": "Unknown",
+      "description": "There's nothing special here. You feel uneasy.\nThere are exits to the east, south, and west.",
+      "x": 0,
+      "y": -2,
+      "isLocked": false,
+      "passages": ["north","east","west"]
+    },
+    {
+      "id": "0,-1",
+      "name": "Unknown",
+      "description": "There's nothing special here.\nThere are exits to the north, east, and west.",
+      "x": 0,
+      "y": -1,
+      "isLocked": false,
+      "passages": ["east","south","west"]
+    },
+    {
       "id": "0,0",
       "name": "Red Circle Room",
       "description": "There's a red circle on the wall.\nThere are exits to the east and west.",
@@ -26,6 +80,51 @@
       "y": 0,
       "isLocked": false,
       "passages": ["east","west"]
+    },
+    {
+      "id": "0,1",
+      "name": "Unknown",
+      "description": "It's unclear where you are. You feel safe here.\nThere are exits to the north and east.",
+      "x": 0,
+      "y": 1,
+      "isLocked": false,
+      "passages": ["north","east"]
+    },
+    {
+      "id": "0,2",
+      "name": "Unknown",
+      "description": "The lights flicker as you enter. You don't know where you are.\nThere are exits to the east, south, and west.",
+      "x": 0,
+      "y": 2,
+      "isLocked": false,
+      "passages": ["east","south","west"]
+    },
+    {
+      "id": "key3",
+      "name": "Exit",
+      "description": "You're free.",
+      "x": 1,
+      "y": -3,
+      "isLocked": true,
+      "passages": ["north"]
+    },
+    {
+      "id": "1,-2",
+      "name": "Unknown",
+      "description": "There's nothing special here. You feel a draft from the south. Light trickles in through the slotted window.\nThere are exits to the north, south, and west.",
+      "x": 1,
+      "y": -2,
+      "isLocked": false,
+      "passages": ["north","south","west"]
+    },
+    {
+      "id": "1,-1",
+      "name": "Unknown",
+      "description": "There's nothing special here.\nThere are exits to the north, south, and west.",
+      "x": 1,
+      "y": -1,
+      "isLocked": false,
+      "passages": ["north","south","east","west"]
     },
     {
       "id": "1,0",
@@ -46,6 +145,24 @@
       "passages": ["north","south","east","west"]
     },
     {
+      "id": "1,2",
+      "name": "Unknown",
+      "description": "There's nothing special here.\nThere are exits to the east, south, and west.",
+      "x": 1,
+      "y": 2,
+      "isLocked": false,
+      "passages": ["south","east","west"]
+    },
+    {
+      "id": "key1",
+      "name": "Cafeteria",
+      "description": "You enter into a corporate cafeteria. One flickering light is all that allows you to see. \nThere is an exit to the east.",
+      "x": 2,
+      "y": -1,
+      "isLocked": false,
+      "passages": ["east"]
+    },
+    {
       "id": "2,1",
       "name": "Infirmary",
       "description": "You enter into an infirmary. A strange sense of comfort overrides you. Then a thud.\nThere are exits to the north and east.",
@@ -55,13 +172,13 @@
       "passages": ["north","south","east","west"]
     },
     {
-      "id": "2,-1",
-      "name": "Cafeteria",
-      "description": "You enter into a corporate cafeteria. One flickering light is all that allows you to see. \nThere is an exit to the east.",
+      "id": "2,2",
+      "name": "Unknown",
+      "description": "There are exits to the south and west.",
       "x": 2,
-      "y": -1,
-      "isLocked": false,
-      "passages": ["east"]
+      "y": 2,
+      "isLocked": true,
+      "passages": ["south","west"]
     }
   ]
 }
