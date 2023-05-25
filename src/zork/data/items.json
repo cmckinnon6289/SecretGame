@@ -66,7 +66,7 @@
             "isMonster": true
         },
         {
-            "name": "monster",
+            "name": "Skeleton", 
             "x": 1, 
             "y": -2,
             "weight": 1000, 

@@ -9,7 +9,7 @@ public class Room {
   private String description;
   private Boolean isLocked;
   private String keyID;
-  private final CoordKey coords;
+  private CoordKey coords; 
   private ArrayList<String> passages;
   private ArrayList<Item> itemsInRoom = new ArrayList<Item>();
   public static HashMap<Room,ArrayList<Item>> itemsList = new HashMap<Room,ArrayList<Item>>();
@@ -22,7 +22,7 @@ public class Room {
     this.passages = newPassages;
   }
   
-  public void addItem(Item item){
+  public void addItem(Item item){ 
     itemsInRoom.add(item);
   }
   // public void setInventory(HashMap itemsList){
@@ -35,7 +35,7 @@ public class Room {
    * Create a room described "description". Initially, it has no exits.
    * "description" is something like "a kitchen" or "an open court yard".
    */
-  public Room(String description) {
+  public Room(String description) {  
     this.description = description;
     passages = new ArrayList<String>();
     keyID = null;
@@ -145,7 +145,7 @@ public class Room {
     this.description = description;
     this.roomName = roomName;
     this.isLocked = locked;
-    this.coords = coords;
+    this.coords = coords; 
     this.keyID = key;
     for (String p : passageArr) {
       this.passages.add(p);
