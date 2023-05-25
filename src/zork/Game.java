@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.UnsupportedAudioFileException; 
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -237,7 +237,7 @@ public class Game {
     } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("sandwich")){
       Game.HP += 5;
       System.out.println("You ate your sandwich, bringing your health back up to " + Game.getHP());
-      Inventory.removeItem(sandwich);
+      Inventory.removeItem(sandwich); 
     }else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("apple")){
       Game.HP += 1;
       System.out.println("You ate an apple, restoring your health by 1, your health is now at " + Game.getHP());
@@ -261,6 +261,10 @@ public class Game {
   }
 
   // implementations of user commands:
+
+  private static int getHP() {
+    return HP; 
+  }
 
   /**
    * Print out some help information. Here we print some stupid, cryptic message
