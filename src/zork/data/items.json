@@ -2,57 +2,73 @@
     "items": [
         {
             "name": "medkit",
-            "x": null,
-            "y": null,
+            "x": 2,
+            "y": 1,
             "weight": 5,
             "openable": false,
             "isKey": false
         },
         {
             "name": "medkit",
-            "x": null,
-            "y": null,
+            "x": -2,
+            "y": 2, 
             "weight": 5,
             "openable": false,
             "isKey": false
         },
         {
             "name": "Lantern",
-            "x": null, 
-            "y": null,
+            "x": 0, 
+            "y": 0,
             "weight": 5, 
             "openable": false,
             "isKey": false
         },
         {
             "name": "Sword",
-            "x": null, 
-            "y": null,
+            "x": -2, 
+            "y": 2,
             "weight": 10, 
             "openable": false,
             "isKey": false
         },
         {
             "name": "Bread",
-            "x": null, 
-            "y": null,
+            "x": 1, 
+            "y": 0,
             "weight": 5, 
             "openable": false,
             "isKey": false
         },
-
         {
-            "name": "sling shot",
-            "x": null, 
-            "y": null,
+            "name": "Apple",
+            "x": -1, 
+            "y": 3,
             "weight": 5, 
             "openable": false,
             "isKey": false
+        },
+        {
+            "name": "Axe",
+            "x": -2, 
+            "y": -2,
+            "weight": 20, 
+            "openable": false,
+            "isKey": false
+        },
+        {
+            "name": "BOSS",
+            "x": -1, 
+            "y": 1,
+            "weight": 1000, 
+            "openable": false,
+            "isKey": false,
+            "isMonster": true
         },
         {
             "name": "monster",
-            "x": null, 
-            "y": null,
+            "x": 1, 
+            "y": -2,
             "weight": 1000, 
             "openable": false,
             "isKey": false,
