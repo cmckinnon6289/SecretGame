@@ -27,7 +27,7 @@
         {
             "name": "Sword",
             "x": -2, 
-            "y": 2,
+            "y": -2,
             "weight": 10, 
             "openable": false,
             "isKey": false
@@ -72,7 +72,7 @@
             "weight": 1000, 
             "openable": false,
             "isKey": false,
-            "isMonster": true
+            "isMonster": true 
         }
 
     ]
