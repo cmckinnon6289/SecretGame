@@ -161,8 +161,8 @@ public class Room {
   }
 
   public void unlockRoom(Key key){
-    if (this.getKeyId() == null) {
-      System.out.println("This room has no lock.");
+    if (!this.isLocked) {
+      System.out.println("This room is not locked.");
     } else {
       if (this.getKeyId().equals(key.getKeyId())) {
         this.isLocked = false;
