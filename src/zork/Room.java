@@ -160,14 +160,19 @@ public class Room {
     return description;
   }
 
-  public boolean matchKey(String keyid){
-    if(keyid.equals(getKeyId()))
-     return true;  
-    else 
-      return false;  
+  public void unlockRoom(Key key){
+    if (this.getKeyId() == null) {
+      System.out.println("This room has no lock.");
+    } else {
+      if (this.getKeyId().equals(key.getKeyId())) {
+        this.isLocked = false;
+      } else {
+        System.out.println("Wrong key.");
+      }
+    }
   }
 
-  private Object getKeyId() {
+  private String getKeyId() {
     return keyID; 
   }
 

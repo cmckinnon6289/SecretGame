@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -19,7 +18,7 @@ public class Game {
   public static int HP = 20; 
   public static final int MAXHP = 20; 
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
-  public static ArrayList<Item> inventory = new ArrayList<Item>(); 
+  public static Inventory inventory = new Inventory();
 
   private Parser parser;
   private static Room currentRoom;
@@ -110,7 +109,7 @@ public class Game {
       Boolean isLocked = (Boolean) ((JSONObject) roomObj).get("isLocked");
       String keyID = null;
       if (isLocked) {
-        keyID = (String) ((JSONObject) roomObj).get("keyID");
+        keyID = (String) ((JSONObject) roomObj).get("id");
       }
       JSONArray passageJSON =((JSONArray)((JSONObject) roomObj).get("passages"));
       String[] passages = new String[passageJSON.size()];
