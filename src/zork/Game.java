@@ -261,6 +261,17 @@ public class Game {
       goRoom(command);   }
     else if(commandWord.equals("run")){
       goRoom(command);   }
+    else if(commandWord.equals("unlock")) {
+      if (command.hasSecondWord()) {
+        Room roomToUnlock = currentRoom.nextRoom(command.getSecondWord());
+        if (roomToUnlock == null) System.out.println("Room does not exist.");
+        else if (command.hasThirdWord()) {
+          Key key = (Key) inventory.getItem(command.getThirdWord());
+          if (key == null) System.out.println("Key not found.");
+          roomToUnlock.unlockRoom(key);
+        } else System.out.println("No key specified.");
+      } else System.out.println("No room specified.");
+    }
     return false;
   }
 

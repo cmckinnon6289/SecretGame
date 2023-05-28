@@ -34,9 +34,9 @@ public class Parser {
     }
 
     if (commands.isCommand(word1))
-      return new Command(word1, word2);
+      return new Command(word1, word2, word3);
     else
-      return new Command(null, word2);
+      return new Command(null, word2, word3);
   }
 
   /**

@@ -43,4 +43,14 @@ public class Inventory {
     }
   }
 
+  public Object getItem(String name) {
+    for (int i = 0; i < items.size(); i++) {
+      Item target = items.get(i);
+      if (target.getName() == name) {
+        return target;
+      }
+    }
+    return null;
+  }
+
 }

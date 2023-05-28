@@ -10,16 +10,10 @@ public class Command {
    * one (or both) can be null. The command word should be null to indicate that
    * this was a command that is not recognised by this game.
    */
-  public Command(String firstWord, String secondWord) {
+  public Command(String firstWord, String secondWord, String thirdWord) {
     commandWord = firstWord;
     this.secondWord = secondWord;
-    this.thirdWord = null;
-  }
-  
-  public Command(String first, String second, String third) {
-    commandWord = first;
-    this.secondWord = second;
-    this.thirdWord = third;
+    this.thirdWord = thirdWord;
   }
 
   /**
@@ -54,5 +48,9 @@ public class Command {
    */
   public boolean hasSecondWord() {
     return (secondWord != null);
+  }
+
+  public boolean hasThirdWord() {
+    return (thirdWord != null);
   }
 }
