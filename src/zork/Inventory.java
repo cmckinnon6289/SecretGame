@@ -43,7 +43,7 @@ public class Inventory {
     for (int i = 0; i < items.size(); i++) {
       Object target = items.get(i);
       Item targetItem = (Item) target;
-      if (targetItem.name.equals(name)) {
+      if (targetItem.name.toLowerCase().equals(name.toLowerCase())) {
         return target;
       }
     }

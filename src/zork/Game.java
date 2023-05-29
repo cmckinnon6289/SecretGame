@@ -15,7 +15,7 @@ import org.json.simple.parser.JSONParser;
 
 public class Game {
   public static int moves = 1;
-  public static int HP = 20; 
+  public static int HP = 15;
   public static final int MAXHP = 20; 
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
   public static Inventory playerInventory = new Inventory();
@@ -140,11 +140,16 @@ public class Game {
       int weight = ((Long) ((JSONObject) itemObj).get("weight")).intValue(); 
       Boolean openable = (Boolean) ((JSONObject) itemObj).get("openable");
       Boolean isKey = (Boolean) ((JSONObject) itemObj).get("isKey");
+      Boolean isMonster = (Boolean) ((JSONObject) itemObj).get("isMonster");
       CoordKey locationKey = new CoordKey(((Long) ((JSONObject) itemObj).get("x")).intValue(),((Long) ((JSONObject) itemObj).get("y")).intValue());
       Room location = roomMap.get(locationKey);
       if (isKey) {
         String keyID = (String) ((JSONObject) itemObj).get("keyID");
         new Key(keyID, itemName, weight, location);
+      } if (isMonster) {
+        int hp = ((Long) ((JSONObject) itemObj).get("hp")).intValue(); 
+        int attack = ((Long) ((JSONObject) itemObj).get("attack")).intValue();
+        new Monster(itemName, hp, attack, location);
       } else {
         new Item(weight,itemName,openable,location);
       }
@@ -182,9 +187,11 @@ public class Game {
     System.out.println("-----------------------------------------------------");
     System.out.println("INCIDENT REPORT");
     System.out.println("-----------------------------------------------------");
-    System.out.println("On ██████████ at █████, subject D-9341 was seen");
+    System.out.println("On ██████████, at █████, subject D-9341 was seen");
     System.out.println("breaching the perimeter of Site-19. Subject was");
     System.out.println("apprehended and terminated by ███████ agents.");
+    System.out.println("An investigation has begun to search for any");
+    System.out.println("explanation as to how subject D-9341 escaped.");
     System.out.println("-----------------------------------------------------");
   }
 
@@ -241,7 +248,7 @@ public class Game {
     String commandWord = command.getCommandWord();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("go")){
+    else if (commandWord.equals("go") || commandWord.equals("move")){
       goRoom(command);
     }
     else if (commandWord.equals("quit") || commandWord.equals("exit")) {
@@ -255,20 +262,32 @@ public class Game {
     } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
       System.out.println("Eat what?");
     } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("sandwich")){
-      Game.HP += 5;
-      Game.checkHP();
-      System.out.println("You ate your sandwich, bringing your health back up to " + Game.getHP());
+      Item sandwich = (Item) playerInventory.getItem("sandwich");
+      if (sandwich != null) {
+        Game.HP += 5;
+        Game.checkHP();
+        System.out.println("You eat your sandwich, bringing your health up to " + Game.getHP());
+        playerInventory.removeItem(sandwich);
+      } else System.out.println("You wish you could.");
     }else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("apple")){
-      Game.HP += 1;
-      Game.checkHP();
-      System.out.println("You ate an apple, bringing your health back up to " + Game.getHP());
+      Item apple = (Item) playerInventory.getItem("apple");
+      if (apple != null) {
+        Game.HP += 1;
+        Game.checkHP();
+        System.out.println("You ate an apple, bringing your health up to " + Game.getHP());
+        playerInventory.removeItem(apple);
+      } else System.out.println("You wish you could.");
     } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("bread")){
-      Game.HP += 3;
-      Game.checkHP();
-      System.out.println("You ate an piece of bread, bringing your health back up to " + Game.getHP());
-    }else if(commandWord.equals("eat") && command.hasSecondWord())
+      Item bread = (Item) playerInventory.getItem("bread");
+      if (bread != null) {
+        Game.HP += 3;
+        Game.checkHP();
+        System.out.println("You ate an piece of bread, bringing your health up to " + Game.getHP());
+        playerInventory.removeItem(bread);
+      } else System.out.println("You wish you could.");
+    } else if(commandWord.equals("eat") && command.hasSecondWord())
       System.out.println("You cannot eat a " + command.getSecondWord());
-    else if (commandWord.equals("take") && command.hasSecondWord()) {
+    else if ((commandWord.equals("take") || commandWord.equals("grab") || commandWord.equals("get")) && command.hasSecondWord()) {
       Item item = Room.takeItemFromRoom(command.getSecondWord());
       if (item == null) {
         System.out.println("No such item exists in this room.");
