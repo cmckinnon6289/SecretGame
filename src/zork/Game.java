@@ -143,15 +143,13 @@ public class Game {
       CoordKey locationKey = new CoordKey(((Long) ((JSONObject) itemObj).get("x")).intValue(),((Long) ((JSONObject) itemObj).get("y")).intValue());
       Room location = roomMap.get(locationKey);
       if (isKey) {
-        // handle specially 
+        String keyID = (String) ((JSONObject) itemObj).get("keyID");
+        new Key(keyID, itemName, weight, location);
       } else {
         new Item(weight,itemName,openable,location);
       }
     }
-  } 
-
-
-        
+  }
 
   /**
    * Main play routine. Loops until end of play.
@@ -205,7 +203,7 @@ public class Game {
     System.out.println();
     System.out.println("---------------------------------------------------------------------------------------");
     try {
-      Thread.sleep(3000);
+      Thread.sleep(4000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -283,12 +281,12 @@ public class Game {
       goRoom(command);   }
     else if(commandWord.equals("unlock")) {
       if (command.hasSecondWord()) {
-        Room roomToUnlock = currentRoom.nextRoom(command.getSecondWord());
+        Room roomToUnlock = currentRoom.searchForRoom(command.getSecondWord());
         if (roomToUnlock == null) System.out.println("Room does not exist.");
         else if (command.hasThirdWord()) {
-          Key key = (Key) playerInventory.getItem(command.getThirdWord());
+          Key key = (Key) playerInventory.getItem(command.getThirdWord().toLowerCase());
           if (key == null) System.out.println("Key not found.");
-          roomToUnlock.unlockRoom(key);
+          else roomToUnlock.unlockRoom(key);
         } else System.out.println("No key specified.");
       } else System.out.println("No room specified.");
     }
@@ -327,6 +325,7 @@ public class Game {
     String direction = command.getSecondWord();
     // Try to leave current room.
     Room nextRoom = currentRoom.nextRoom(direction);
+    // System.out.println(getCurrentRoom().getRoomCoords()); - to verify if we have started shapeshifting through walls
     if (nextRoom == null)
       System.out.println("You cannot go that way.");
     else {

@@ -25,6 +25,15 @@
             "isKey": false
         },
         {
+            "name": "Key1",
+            "x": 0, 
+            "y": 0,
+            "weight": 5, 
+            "openable": false,
+            "isKey": true,
+            "keyID": "key1"
+        },
+        {
             "name": "Sandwich",
             "x": 0, 
             "y": 0,

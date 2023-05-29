@@ -1,10 +1,10 @@
 package zork;
 
-public class weapons extends Item {
+public class Weapon extends Item {
 
     private int damage; 
 
-    public weapons(int damage, int weight, String name, boolean isOpenable, Room location){
+    public Weapon(int damage, int weight, String name, boolean isOpenable, Room location){
         super(weight, name, isOpenable, location);
         this.damage = damage; 
         this.weight = weight;  
@@ -14,7 +14,7 @@ public class weapons extends Item {
         return damage;  
     } 
 
-    public String getWeapon(){
+    public String getWeaponName(){
         return name;   
     } 
 

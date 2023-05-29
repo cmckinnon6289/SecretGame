@@ -40,7 +40,7 @@ public class Item extends OpenableObject {
       if (!isLocked())   
         System.out.println(this.name + " isn't something you can open.");
       else
-        System.out.println("The key hole catches your eye as you fail to open it.");
+        System.out.println("The item's key hole catches your eye as you fail to open it.");
     } else {
 
     }
@@ -76,5 +76,9 @@ public class Item extends OpenableObject {
     this.place(location);
   }
 
+  @Override
+  public String toString() {
+    return this.getName();
+  }
 }
 

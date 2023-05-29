@@ -60,4 +60,9 @@ public class CoordKey {
         CoordKey ref = (CoordKey) obj;
         return ref.x == this.x && ref.y == this.y;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(this.x)+", "+Integer.toString(this.y);
+    }
 }

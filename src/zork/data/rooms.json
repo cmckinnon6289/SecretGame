@@ -120,7 +120,7 @@
     {
       "id": "1,-1",
       "name": "Unknown",
-      "description": "There's nothing special here.\nThere are exits to the north, south, and west.",
+      "description": "There's nothing special here.\nThere are exits to the north, south, east, and west.",
       "x": 1,
       "y": -1,
       "isLocked": false,
@@ -156,11 +156,11 @@
     {
       "id": "key1",
       "name": "Cafeteria",
-      "description": "You enter into a corporate cafeteria. One flickering light is all that allows you to see. \nThere is an exit to the east.",
+      "description": "You enter into a corporate cafeteria. One flickering light is all that allows you to see. \nThere is an exit to the west.",
       "x": 2,
       "y": -1,
-      "isLocked": false,
-      "passages": ["east"]
+      "isLocked": true,
+      "passages": ["west"]
     },
     {
       "id": "2,1",

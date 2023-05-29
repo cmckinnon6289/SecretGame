@@ -91,16 +91,10 @@ public class Room {
    */
   public Room nextRoom(String direction) {
     try {
-      HashMap<String,Integer> dirs = directionParse(direction);
-      CoordKey currCoords = new CoordKey(Game.getCurrentRoom());
-      currCoords.addTo("x",dirs.get("x"));
-      currCoords.addTo("y",dirs.get("y"));
-      Room test = Game.roomMap.get(currCoords);
+      Room test = searchForRoom(direction);
       if (test != null) {
         if (test.isLocked) {
           System.out.println("The door is locked.");
-          currCoords.addTo("x",dirs.get("x")*-1);
-          currCoords.addTo("y",dirs.get("y")*-1);
           return null;
         } else
           return test;
@@ -109,6 +103,25 @@ public class Room {
       }
     } catch (Exception ex) {
       System.out.println("Unknown error.");
+      return null;
+    }
+  }
+
+  public Room searchForRoom(String direction) {
+    HashMap<String,Integer> dirs = directionParse(direction);
+    Boolean valid = false;
+    for (String passage : Game.getCurrentRoom().getPassages()) {
+      if (direction.equals(passage)) {
+        valid = true;
+        break;
+      }
+    } if (valid) {
+      CoordKey currCoords = new CoordKey(Game.getCurrentRoom());
+      currCoords.addTo("x",dirs.get("x"));
+      currCoords.addTo("y",dirs.get("y"));
+      Room test = Game.roomMap.get(currCoords);
+      return test;
+    } else {
       return null;
     }
   }
