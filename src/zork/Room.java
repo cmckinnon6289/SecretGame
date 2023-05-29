@@ -176,4 +176,15 @@ public class Room {
     return keyID; 
   }
 
+  public static Item takeItemFromRoom(String itemID) {
+    ArrayList<Item> roomItems = Game.getCurrentRoom().itemsInRoom;
+    Item target = null;
+    if (roomItems != null) {
+      for (Item item : roomItems) {
+        if (item.getName().toLowerCase().equals(itemID)) target = item;
+      }
+    }
+    return target;
+  }
+
 }

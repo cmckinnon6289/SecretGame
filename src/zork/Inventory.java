@@ -4,16 +4,12 @@ import java.util.ArrayList;
 
 public class Inventory {
   private ArrayList<Item> items;
-  private final int MAXWEIGHT = 100;
+  public static final int MAXWEIGHT = 100;
   private int currentWeight;
 
   public Inventory() {
     this.items = new ArrayList<Item>();
     this.currentWeight = getCurrentWeight();
-  }
-
-  public int getMaxWeight() {
-    return MAXWEIGHT; 
   }
 
   public int getCurrentWeight() {

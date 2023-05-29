@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException; 
-
+import javax.sound.sampled.UnsupportedAudioFileException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,7 +18,7 @@ public class Game {
   public static int HP = 20; 
   public static final int MAXHP = 20; 
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
-  public static Inventory inventory = new Inventory();
+  public static Inventory playerInventory = new Inventory();
 
   private Parser parser;
   private static Room currentRoom;
@@ -39,8 +39,11 @@ public class Game {
 
   private void initGame() throws Exception {
     try {
-      initItems("src\\zork\\data\\items.json");
       initRooms("src\\zork\\data\\rooms.json");
+      initItems("src\\zork\\data\\items.json");
+      roomMap.forEach((key,val) -> {
+        val.initRoomItems();
+      });
       File bg = new File("src\\zork\\data\\sfx\\background.wav");
       try {
         AudioHandler.loopClip(bg);
@@ -76,12 +79,12 @@ public class Game {
   }
 
   private void milestoneCheck() {
-    int increment = 14;
-    if (moves == increment) {
+    final int INC = 14;
+    if (moves == INC) {
       System.out.println("-----");
       System.out.println("Your stomach pangs. When was your last meal?");
       System.out.println("-----");
-    } else if (moves == increment*3) {
+    } else if (moves == INC*3) {
       System.out.println("-----");
       System.out.println("Awareness gives way to lightheadedness. You can barely stand straight.\nYour sense of direction is hazy.");
       System.out.println("-----");
@@ -249,11 +252,23 @@ public class Game {
     } else if(commandWord.equals("eat") && command.hasSecondWord())
       System.out.println("You cannot eat a " + command.getSecondWord());
     else if (commandWord.equals("take") && command.hasSecondWord()) {
-      
+      Item item = Room.takeItemFromRoom(command.getSecondWord());
+      if (item == null) {
+        System.out.println("No such item exists in this room.");
+      } else {
+        if (playerInventory.getCurrentWeight()+item.getWeight() > Inventory.MAXWEIGHT) {
+          System.err.println("Adding this itme to your inventory could incapacitate you. You decide to put it down.");
+        } else {
+          ArrayList<Item> roomItems = Room.itemsList.get(getCurrentRoom());
+          roomItems.remove(item);
+          playerInventory.addItem(item);
+          System.out.println("You pick up the "+item.getName()+".");
+          Room.itemsList.put(getCurrentRoom(),roomItems);
+        }
       }
-    
+    }
     else if(commandWord.equals("jump")){
-      System.out.println("You jumped up and down and did nothing");
+      System.out.println("The energy you expended felt like a knife to the chest as it left your body.");
     }
     else if(commandWord.equals("search")){
        System.out.println("*****");
@@ -267,7 +282,7 @@ public class Game {
         Room roomToUnlock = currentRoom.nextRoom(command.getSecondWord());
         if (roomToUnlock == null) System.out.println("Room does not exist.");
         else if (command.hasThirdWord()) {
-          Key key = (Key) inventory.getItem(command.getThirdWord());
+          Key key = (Key) playerInventory.getItem(command.getThirdWord());
           if (key == null) System.out.println("Key not found.");
           roomToUnlock.unlockRoom(key);
         } else System.out.println("No key specified.");

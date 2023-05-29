@@ -1,6 +1,5 @@
 package zork;
 
-import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Item extends OpenableObject { 
@@ -8,7 +7,6 @@ public class Item extends OpenableObject {
   public int weight;
   public String name;
   private boolean isOpenable;
-  public static HashMap<Room,ArrayList<Item>> supplyRoster = new HashMap<Room,ArrayList<Item>>();
 
   public Item(int weight, String name, boolean isOpenable, Room location) {
     this.weight = weight;
@@ -19,21 +17,21 @@ public class Item extends OpenableObject {
 
   public static ArrayList<Item> getRoomItems(Room t) {
     try {
-      return supplyRoster.get(t);
+      return Room.itemsList.get(t);
     } catch (Exception ex) {
       return null;
     }
   }
 
   public void place(Room key) {
-    if (supplyRoster.containsKey(key)) {
-      ArrayList<Item> send = supplyRoster.get(key);
+    if (Room.itemsList.containsKey(key)) {
+      ArrayList<Item> send = Room.itemsList.get(key);
       send.add(this);
-      supplyRoster.put(key,send);
+      Room.itemsList.put(key,send);
     } else {
       ArrayList<Item> send = new ArrayList<Item>();
       send.add(this);
-      supplyRoster.put(key,send);
+      Room.itemsList.put(key,send);
     }
   }
 
@@ -70,7 +68,7 @@ public class Item extends OpenableObject {
   }
 
   public void setLocation(Room location) {
-    supplyRoster.forEach((room,items) -> {
+    Room.itemsList.forEach((room,items) -> {
       if (items.contains(this)) {
         items.remove(this);
       }
