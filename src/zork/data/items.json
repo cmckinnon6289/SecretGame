@@ -25,6 +25,14 @@
             "isKey": false
         },
         {
+            "name": "Sandwich",
+            "x": 0, 
+            "y": 0,
+            "weight": 5, 
+            "openable": false,
+            "isKey": false
+        },
+        {
             "name": "Sword",
             "x": -2, 
             "y": -2,
