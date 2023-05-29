@@ -25,9 +25,9 @@ public class Room {
   public void addItem(Item item){ 
     itemsInRoom.add(item);
   }
-  // public void setInventory(HashMap itemsList){
+  // public void setInventory(ArrayList<Item> itemsList){
   //   for (int i = 0; i < itemsList.size(); i++) {
-  //     Inventory.addItem(itemsList[i])
+  //     Inventory.addItem(itemsList.get(i));
   //   }
   // }
 
@@ -52,7 +52,7 @@ public class Room {
    * Return the description of the room (the one that was defined in the
    * constructor).
    */
-  public String description() {
+  public String description(Room room) {
     return "Room: " + roomName + "\n\n" + description + "\n" + itemsInRoom;
   }
 

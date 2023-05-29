@@ -149,6 +149,8 @@ public class Game {
       }
     }
   } 
+
+
         
 
   /**
@@ -210,7 +212,7 @@ public class Game {
     System.out.println("Welcome to the facility.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();
-    System.out.println(currentRoom.description());
+    System.out.println(currentRoom.description(currentRoom));
   }
 
   /**
@@ -235,7 +237,7 @@ public class Game {
       else
         return true; // signal that we want to quit
     if (commandWord.equals("take")) {
-
+      
     }
     } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
       System.out.println("Eat what?");
@@ -243,13 +245,15 @@ public class Game {
       Game.HP += 5;
       Game.checkHP();
       System.out.println("You ate your sandwich, bringing your health back up to " + Game.getHP());
-      //Inventory.removeItem(sandwich); 
     }else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("apple")){
       Game.HP += 1;
       Game.checkHP();
-      System.out.println("You ate an apple, restoring your health by 1, your health is now at " + Game.getHP());
-      //Inventory.removeItem(apple);
-    } else if(commandWord.equals("eat") && command.hasSecondWord())
+      System.out.println("You ate an apple, bringing your health back up to " + Game.getHP());
+    } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("bread")){
+      Game.HP += 3;
+      Game.checkHP();
+      System.out.println("You ate an piece of bread, bringing your health back up to " + Game.getHP());
+    }else if(commandWord.equals("eat") && command.hasSecondWord())
       System.out.println("You cannot eat a " + command.getSecondWord());
     else if (commandWord.equals("take") && command.hasSecondWord()) {
       Item item = Room.takeItemFromRoom(command.getSecondWord());
@@ -304,6 +308,7 @@ public class Game {
   private void printHelp() {
     System.out.println("You are lost. You are alone. The rooms");
     System.out.println("are forebearing and intimidating.");
+    System.out.println(currentRoom.description(currentRoom));
     System.out.println();
     System.out.println("Your command words are:");
     parser.showCommands();
@@ -326,7 +331,7 @@ public class Game {
       System.out.println("You cannot go that way.");
     else {
       currentRoom = nextRoom;
-      System.out.println(currentRoom.description());
+      System.out.println(currentRoom.description(currentRoom));
     }
   }
 
