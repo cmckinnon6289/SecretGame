@@ -58,7 +58,7 @@ public class CoordKey {
         if (!(obj instanceof CoordKey))
             return false;
         CoordKey ref = (CoordKey) obj;
-        return ref.x == this.x && ref.y == this.y;
+        return (ref.x == this.x && ref.y == this.y);
     }
 
     @Override

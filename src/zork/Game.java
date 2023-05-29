@@ -158,6 +158,7 @@ public class Game {
     printHeadphoneWarning();
     printWelcome();
     boolean finished = false;
+    final CoordKey exitCoords = new CoordKey(1,-3);
     while (!finished) {
       Command command;
       moves++;
@@ -166,11 +167,25 @@ public class Game {
         finished = processCommand(command);
         ambience();
         milestoneCheck();
+        if (getCurrentRoom().getRoomCoords().equals(exitCoords)) {
+          goodEnding();
+          finished = true;
+      }
       } catch (IOException e) {
         e.printStackTrace();
       }
     }
     System.out.println("Thank you for playing. Good bye.");
+  }
+
+  private void goodEnding() {
+    System.out.println("-----------------------------------------------------");
+    System.out.println("INCIDENT REPORT");
+    System.out.println("-----------------------------------------------------");
+    System.out.println("On ██████████ at █████, subject D-9341 was seen");
+    System.out.println("breaching the perimeter of Site-19. Subject was");
+    System.out.println("apprehended and terminated by ███████ agents.");
+    System.out.println("-----------------------------------------------------");
   }
 
   private void printHeadphoneWarning() {
@@ -287,6 +302,7 @@ public class Game {
           Key key = (Key) playerInventory.getItem(command.getThirdWord().toLowerCase());
           if (key == null) System.out.println("Key not found.");
           else roomToUnlock.unlockRoom(key);
+          
         } else System.out.println("No key specified.");
       } else System.out.println("No room specified.");
     }

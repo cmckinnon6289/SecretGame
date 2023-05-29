@@ -179,6 +179,7 @@ public class Room {
     } else {
       if (this.getKeyId().equals(key.getKeyId())) {
         this.isLocked = false;
+        System.out.println("You hear a click as the lock turns. The door is now unlocked.");
       } else {
         System.out.println("Wrong key.");
       }

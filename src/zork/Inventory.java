@@ -41,8 +41,9 @@ public class Inventory {
 
   public Object getItem(String name) {
     for (int i = 0; i < items.size(); i++) {
-      Item target = items.get(i);
-      if (target.getName() == name) {
+      Object target = items.get(i);
+      Item targetItem = (Item) target;
+      if (targetItem.name.equals(name)) {
         return target;
       }
     }

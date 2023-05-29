@@ -25,13 +25,31 @@
             "isKey": false
         },
         {
-            "name": "Key1",
+            "name": "key1",
             "x": 0, 
-            "y": 0,
+            "y": -1,
             "weight": 5, 
             "openable": false,
             "isKey": true,
             "keyID": "key1"
+        },
+        {
+            "name": "key2",
+            "x": 2, 
+            "y": -1,
+            "weight": 5, 
+            "openable": false,
+            "isKey": true,
+            "keyID": "key2"
+        },
+        {
+            "name": "key3",
+            "x": -1, 
+            "y": 1,
+            "weight": 5, 
+            "openable": false,
+            "isKey": true,
+            "keyID": "key3"
         },
         {
             "name": "Sandwich",
