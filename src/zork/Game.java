@@ -207,7 +207,7 @@ public class Game {
     System.out.println("Welcome to the facility.");
     System.out.println("Type 'help' if you need help.");
     System.out.println();
-    System.out.println(currentRoom.description());
+    System.out.println(currentRoom.description(currentRoom));
   }
 
   /**
@@ -232,7 +232,7 @@ public class Game {
       else
         return true; // signal that we want to quit
     if (commandWord.equals("take")) {
-
+      
     }
     } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
       System.out.println("Eat what?");
@@ -289,6 +289,7 @@ public class Game {
   private void printHelp() {
     System.out.println("You are lost. You are alone. The rooms");
     System.out.println("are forebearing and intimidating.");
+    System.out.println(currentRoom.description(currentRoom));
     System.out.println();
     System.out.println("Your command words are:");
     parser.showCommands();
@@ -311,7 +312,7 @@ public class Game {
       System.out.println("You cannot go that way.");
     else {
       currentRoom = nextRoom;
-      System.out.println(currentRoom.description());
+      System.out.println(currentRoom.description(currentRoom));
     }
   }
 
