@@ -38,12 +38,12 @@
     },
     {
       "id": "key2",
-      "name": "Boss fight",
-      "description": "What is that thing?\nThere are exits to the north, east, and south.\nYou can't leave until you fight it.",
+      "name": "Boss room",
+      "description": "What is that thing?\nThere are exits to the north, east, and south.\nYou can't leave until you kill it.",
       "x": -1,
       "y": 1,
       "isLocked": true,
-      "passages": ["north","south","east"]
+      "passages": ["north","south"]
     },
     {
       "id": "-1,2",
