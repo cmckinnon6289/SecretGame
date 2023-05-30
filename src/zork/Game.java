@@ -345,7 +345,7 @@ public class Game {
     if(playerInventory.isEmpty())
     System.out.println("You have nothing in your inventory");
     else{
-      System.out.println("You have: ");
+      System.out.print("You have: ");
       playerInventory.showItems();
     }
   }

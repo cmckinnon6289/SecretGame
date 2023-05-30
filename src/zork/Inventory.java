@@ -56,9 +56,8 @@ public class Inventory {
   }
   public void showItems(){
     String msg = "";
-    for (int i = 0; i < items.size(); i++) {
+    for (int i = 0; i < items.size(); i++) 
       msg += items.get(i) + " ";
-    }
     System.out.println(msg);
   }
 
