@@ -1,12 +1,13 @@
 package zork;
 
-public class Monster {
+public class Monster extends Item {
     private String name;
     private int health;
     private int attackDamage;
     private boolean isMonster;
 
-    public Monster(String name, int health, int attackDamage) {
+    public Monster(String name, int health, int attackDamage, Room location) {
+        super(1000, name, false, location);
         this.isMonster = true; 
         this.name = name;
         this.health = health;
