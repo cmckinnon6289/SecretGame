@@ -249,9 +249,6 @@ public class Game {
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    if (commandWord.equals("take")) {
-      
-    }
     } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
       System.out.println("Eat what?");
     } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("sandwich")){
@@ -326,6 +323,12 @@ public class Game {
     System.out.println();
     System.out.println("Your command words are:");
     parser.showCommands();
+    if(playerInventory.isEmpty())
+    System.out.println("You have nothing in your inventory");
+    else{
+      System.out.println("You have: ");
+      playerInventory.showItems();
+    }
   }
 
   /**

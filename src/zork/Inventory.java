@@ -49,5 +49,17 @@ public class Inventory {
     }
     return null;
   }
+  public boolean isEmpty(){
+    if(items.size() == 0) 
+    return true;
+    else return false;
+  }
+  public void showItems(){
+    String msg = "";
+    for (int i = 0; i < items.size(); i++) {
+      msg += items.get(i) + " ";
+    }
+    System.out.println(msg);
+  }
 
 }
