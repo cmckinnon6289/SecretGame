@@ -1,21 +1,17 @@
 package zork;
 
-//misc imports
-import java.nio.file.Files;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//audio imports
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.File;
-
-//json imports
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import java.nio.file.Path;
 
 public class Game {
   public static int moves = 0;
