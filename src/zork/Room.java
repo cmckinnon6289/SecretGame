@@ -53,7 +53,7 @@ public class Room {
    * constructor).
    */
   public String description(Room room) {
-    return "Room: " + roomName + "\n\n" + description + "\nItems in this room: " + itemsInRoom;
+    return "Room: " + roomName + "\n\n" + description + "\n" + itemsInRoom;
   }
 
   /**

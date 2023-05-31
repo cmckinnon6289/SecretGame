@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class Game {
-  public static int moves = 0;
+  public static int moves = 1;
   public static int HP = 15;
   public static final int MAXHP = 20; 
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
@@ -176,14 +176,6 @@ public class Game {
           goodEnding();
           finished = true;
       }
-      if(playerInventory.isEmpty())
-    System.out.println("You have nothing in your inventory");
-    else{
-      System.out.print("You have: ");
-      playerInventory.showItems();
-    }
-      System.out.println("You have " + Game.getHP() + " hitpoints");
-
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -264,6 +256,9 @@ public class Game {
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
+    if (commandWord.equals("take")) {
+      
+    }
     } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
       System.out.println("Eat what?");
     } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("sandwich")){
