@@ -293,7 +293,7 @@ public class Game {
         System.out.println("No such item exists in this room.");
       } else {
         if (playerInventory.getCurrentWeight()+item.getWeight() > Inventory.MAXWEIGHT) {
-          System.err.println("Adding this item to your inventory could incapacitate you. You decide to put it down.");
+          System.err.println("Adding this itme to your inventory could incapacitate you. You decide to put it down.");
         } else {
           ArrayList<Item> roomItems = Room.itemsList.get(getCurrentRoom());
           roomItems.remove(item);
@@ -321,6 +321,7 @@ public class Game {
           Key key = (Key) playerInventory.getItem(command.getThirdWord().toLowerCase());
           if (key == null) System.out.println("Key not found.");
           else roomToUnlock.unlockRoom(key);
+          
         } else System.out.println("No key specified.");
       } else System.out.println("No room specified.");
     }
