@@ -146,7 +146,7 @@ public class Game {
       if (isKey) {
         String keyID = (String) ((JSONObject) itemObj).get("keyID");
         new Key(keyID, itemName, weight, location);
-      } if (isMonster) {
+      } else if (isMonster) {
         int hp = ((Long) ((JSONObject) itemObj).get("hp")).intValue(); 
         int attack = ((Long) ((JSONObject) itemObj).get("attack")).intValue();
         new Monster(itemName, hp, attack, location);
