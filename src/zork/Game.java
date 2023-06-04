@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class Game {
+  public static boolean inFight = false;
   public static int moves = 1;
   public static int HP = 15;
   public static final int MAXHP = 20; 
@@ -248,7 +249,7 @@ public class Game {
     String commandWord = command.getCommandWord();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("go") || commandWord.equals("move")){
+    else if (commandWord.equals("go") || commandWord.equals("move") || commandWord.equals("run")) {
       goRoom(command);
     }
     else if (commandWord.equals("quit") || commandWord.equals("exit")) {
@@ -256,9 +257,6 @@ public class Game {
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    if (commandWord.equals("take")) {
-      
-    }
     } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
       System.out.println("Eat what?");
     } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("sandwich")){
@@ -309,10 +307,6 @@ public class Game {
     else if(commandWord.equals("search")){
        System.out.println("*****");
     }
-    else if(commandWord.equals("run")){
-      goRoom(command);   }
-    else if(commandWord.equals("run")){
-      goRoom(command);   }
     else if(commandWord.equals("unlock")) {
       if (command.hasSecondWord()) {
         Room roomToUnlock = currentRoom.searchForRoom(command.getSecondWord());
