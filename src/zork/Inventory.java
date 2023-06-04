@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Inventory {
   private ArrayList<Item> items;
-  public static final int MAXWEIGHT = 100;
+  public static final int MAXWEIGHT = 50;
   private int currentWeight;
 
   public Inventory() {
