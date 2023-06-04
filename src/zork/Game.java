@@ -309,9 +309,6 @@ public class Game {
     else if(commandWord.equals("jump")) {
       System.out.println("The energy you expended felt like a knife to the chest as it left your body.");
     }
-    else if(commandWord.equals("search")) {
-       System.out.println("*****");
-    }
     else if(commandWord.equals("unlock")) {
       if (command.hasSecondWord()) {
         Room roomToUnlock = currentRoom.searchForRoom(command.getSecondWord());
@@ -370,11 +367,10 @@ public class Game {
    * and a list of the command words.
    */
   private void printHelp() {
-    System.out.println("You are lost. You are alone. The rooms");
-    System.out.println("are forebearing and intimidating.");
+    System.out.println("You are lost. You are alone. The rooms are forebearing and intimidating.");
     System.out.println(currentRoom.description(currentRoom));
     System.out.println();
-    System.out.println("Your command words are:");
+    System.out.println("Valid command words are:");
     parser.showCommands();
   }
 
