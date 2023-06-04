@@ -19,8 +19,8 @@ public class Game {
   public static boolean isConfused = false;
   public static boolean finished = false;
   public static int moves = 1;
-  public static int HP = 99; // CHANGE
-  public static final int MAXHP = 99; // CHANGE
+  public static int HP = 15;
+  public static final int MAXHP = 25;
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
   public static Inventory playerInventory = new Inventory();
 

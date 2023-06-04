@@ -168,7 +168,7 @@
       "description": "You enter into an infirmary. A strange sense of comfort overrides you. Then a thud.\nThere are exits to the north and east.",
       "x": 2,
       "y": 1,
-      "isLocked": true,
+      "isLocked": false,
       "passages": ["north","south","east","west"]
     },
     {
@@ -177,7 +177,7 @@
       "description": "There are exits to the south and west.",
       "x": 2,
       "y": 2,
-      "isLocked": true,
+      "isLocked": false,
       "passages": ["south","west"]
     }
   ]
