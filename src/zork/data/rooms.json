@@ -3,7 +3,7 @@
     {
       "id": "-2,-2",
       "name": "Armoury",
-      "description": "You enter into a room for security guards. Too bad about them.\nBlack goo oozes from the ceiling. Hoarse breathing calls to you.\nThere is one exit to the east.",
+      "description": "You enter into a room for security guards; too bad about them.\nBlack goo oozes from the ceiling. Hoarse breathing calls to you.\nThere is one exit to the east.",
       "x": -2,
       "y": -2,
       "isLocked": false,

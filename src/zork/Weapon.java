@@ -7,15 +7,14 @@ public class Weapon extends Item {
     public Weapon(int damage, int weight, String name, boolean isOpenable, Room location){
         super(weight, name, isOpenable, location);
         this.damage = damage; 
-        this.weight = weight;  
     }
 
     public int getDamage(){
-        return damage;  
+        return damage;
     } 
 
     public String getWeaponName(){
-        return name;   
+        return name;
     } 
 
     public void attack() {

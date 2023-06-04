@@ -6,7 +6,7 @@ public class CommandWords {
     private static final String[] VALID_COMMANDS = {
             "quit", "help", "eat", "get", "run", "take", "up", "down", "drink", "open", "close",
             "look", "search", "strike", "rest", "exit", "attack", "pick up", "unlock", "go",
-            "state", "grab"};
+            "state", "grab", "use", "drop", "release"};
 
    
     public boolean isCommand(String aString) { 

@@ -70,7 +70,7 @@
             "name": "Sword",
             "x": -2, 
             "y": -2,
-            "weight": 10, 
+            "weight": 30, 
             "openable": false,
             "isKey": false,
             "isMonster": false
@@ -97,7 +97,7 @@
             "name": "Axe",
             "x": -2, 
             "y": -2,
-            "weight": 20, 
+            "weight": 19,
             "openable": false,
             "isKey": false,
             "isMonster": false
@@ -111,10 +111,10 @@
             "isKey": false,
             "isMonster": true,
             "hp": 40,
-            "attack": 10
+            "attack": 8
         },
         {
-            "name": "Skeleton", 
+            "name": "SKELETON", 
             "x": 1, 
             "y": -2,
             "weight": 1000, 

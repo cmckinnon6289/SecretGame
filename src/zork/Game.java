@@ -14,10 +14,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class Game {
+  public static Monster fighting = null;
   public static boolean inFight = false;
+  public static boolean isConfused = false;
+  public static boolean finished = false;
   public static int moves = 1;
-  public static int HP = 15;
-  public static final int MAXHP = 20; 
+  public static int HP = 99; // CHANGE
+  public static final int MAXHP = 99; // CHANGE
   public static HashMap<CoordKey, Room> roomMap = new HashMap<CoordKey, Room>();
   public static Inventory playerInventory = new Inventory();
 
@@ -94,7 +97,7 @@ public class Game {
   }
 
   private void confusion() {
-    // make later
+    isConfused = true;
   }
 
   private void initRooms(String fileName) throws Exception {
@@ -133,7 +136,6 @@ public class Game {
     String jsonString = Files.readString(path);
     JSONParser parser = new JSONParser();
     JSONObject json = (JSONObject) parser.parse(jsonString);
-
     JSONArray jsonItems = (JSONArray) json.get("items");
 
     for (Object itemObj : jsonItems) {
@@ -151,6 +153,10 @@ public class Game {
         int hp = ((Long) ((JSONObject) itemObj).get("hp")).intValue(); 
         int attack = ((Long) ((JSONObject) itemObj).get("attack")).intValue();
         new Monster(itemName, hp, attack, location);
+      } else if (itemName.toLowerCase().equals("axe") || itemName.toLowerCase().equals("sword")) {
+        new Weapon(15,weight,itemName,false,location);
+      } else if (itemName.toLowerCase().equals("lantern")) {
+        new Lantern(10,itemName,false,location);
       } else {
         new Item(weight,itemName,openable,location);
       }
@@ -163,20 +169,24 @@ public class Game {
   public void play() {
     printHeadphoneWarning();
     printWelcome();
-    boolean finished = false;
     final CoordKey exitCoords = new CoordKey(1,-3);
     while (!finished) {
       Command command;
       moves++;
       try {
+        getCurrentRoom().checkForMonsters();
         command = parser.getCommand();
         finished = processCommand(command);
         ambience();
         milestoneCheck();
         if (getCurrentRoom().getRoomCoords().equals(exitCoords)) {
-          goodEnding();
+          ending();
           finished = true;
-      }
+        }
+        if (inFight) {
+          fighting.strikePlayer();
+          if (HP <= 0) fighting.killed();
+        }
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -184,7 +194,7 @@ public class Game {
     System.out.println("Thank you for playing. Good bye.");
   }
 
-  private void goodEnding() {
+  private void ending() {
     System.out.println("-----------------------------------------------------");
     System.out.println("INCIDENT REPORT");
     System.out.println("-----------------------------------------------------");
@@ -249,43 +259,30 @@ public class Game {
     String commandWord = command.getCommandWord();
     if (commandWord.equals("help"))
       printHelp();
-    else if (commandWord.equals("go") || commandWord.equals("move") || commandWord.equals("run")) {
-      goRoom(command);
-    }
-    else if (commandWord.equals("quit") || commandWord.equals("exit")) {
+    else if (commandWord.equals("go") || commandWord.equals("move") || commandWord.equals("run")) { // move between rooms
+      if (inFight) {
+        System.out.println("You don't have the strength or speed to outrun it.");
+      } else {
+        goRoom(command);
+      }
+    } else if (commandWord.equals("quit") || commandWord.equals("exit")) { // quit game
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equals("eat") && !command.hasSecondWord()) {
-      System.out.println("Eat what?");
-    } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("sandwich")){
-      Item sandwich = (Item) playerInventory.getItem("sandwich");
-      if (sandwich != null) {
-        Game.HP += 5;
-        Game.checkHP();
-        System.out.println("You eat your sandwich, bringing your health up to " + Game.getHP());
-        playerInventory.removeItem(sandwich);
-      } else System.out.println("You wish you could.");
-    }else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("apple")){
-      Item apple = (Item) playerInventory.getItem("apple");
-      if (apple != null) {
-        Game.HP += 1;
-        Game.checkHP();
-        System.out.println("You ate an apple, bringing your health up to " + Game.getHP());
-        playerInventory.removeItem(apple);
-      } else System.out.println("You wish you could.");
-    } else if(commandWord.equals("eat") && command.hasSecondWord() && command.getSecondWord().equals("bread")){
-      Item bread = (Item) playerInventory.getItem("bread");
-      if (bread != null) {
-        Game.HP += 3;
-        Game.checkHP();
-        System.out.println("You ate an piece of bread, bringing your health up to " + Game.getHP());
-        playerInventory.removeItem(bread);
-      } else System.out.println("You wish you could.");
-    } else if(commandWord.equals("eat") && command.hasSecondWord())
-      System.out.println("You cannot eat a " + command.getSecondWord());
-    else if ((commandWord.equals("take") || commandWord.equals("grab") || commandWord.equals("get")) && command.hasSecondWord()) {
+    } else if (commandWord.equals("eat") && !command.hasSecondWord()) { // eat food to restore hp
+      String secondWord = command.getSecondWord();
+      if (secondWord.equals("apple") || secondWord.equals("sandwich") || secondWord.equals("bread")) {
+        Item food = (Item) playerInventory.getItem(command.getSecondWord());
+        if (food != null) {
+          Game.HP += secondWord.length();
+          Game.checkHP();
+          System.out.println("You eat your food, bringing your health up to " + Game.getHP());
+          playerInventory.removeItem(food);
+        } else System.out.println("You wish you could.");
+      } else System.out.println("Not a valid food item.");
+    }
+    else if ((commandWord.equals("take") || commandWord.equals("grab") || commandWord.equals("get")) && command.hasSecondWord()) { // take an item from a room
       Item item = Room.takeItemFromRoom(command.getSecondWord());
       if (item == null) {
         System.out.println("No such item exists in this room.");
@@ -300,11 +297,19 @@ public class Game {
           Room.itemsList.put(getCurrentRoom(),roomItems);
         }
       }
+    } else if (commandWord.equals("drop") || commandWord.equals("release") && command.hasSecondWord()) {
+      Item item = (Item) playerInventory.getItem(command.getSecondWord());
+      if (item == null) System.out.println("Item does not exist.");
+      else {
+        getCurrentRoom().putItemInRoom(item);
+        playerInventory.removeItem(item);
+        System.out.println("You let go of the "+command.getSecondWord()+" and watch as it falls to the ground with strange focus.");
+      }
     }
-    else if(commandWord.equals("jump")){
+    else if(commandWord.equals("jump")) {
       System.out.println("The energy you expended felt like a knife to the chest as it left your body.");
     }
-    else if(commandWord.equals("search")){
+    else if(commandWord.equals("search")) {
        System.out.println("*****");
     }
     else if(commandWord.equals("unlock")) {
@@ -319,6 +324,29 @@ public class Game {
         } else System.out.println("No key specified.");
       } else System.out.println("No room specified.");
     }
+    else if (commandWord.equals("use") && command.hasSecondWord()) {
+      String secondWord = command.getSecondWord();
+      if (secondWord.equals("lantern")) {
+        Lantern lantern = (Lantern) playerInventory.getItem(secondWord);
+        if (lantern != null) lantern.useLantern();
+        else System.out.println("You don't have a lantern.");
+      } else if (secondWord.equals("medkit")) {
+        Item medkit = (Item) playerInventory.getItem(secondWord);
+        if (medkit != null) {
+          HP += 10;
+          Game.checkHP();
+          System.out.println("You use the medkit. You feel better.\nYour health is now "+Game.getHP()+".");
+        }
+      } else System.out.println("You cannot use this item.");
+    } else if (commandWord.equals("attack")) {
+      if (command.hasSecondWord()) {
+        Monster target = currentRoom.getEntity(command.getSecondWord().toLowerCase());
+        if (command.hasThirdWord() && target != null) {
+          Weapon weapon = (Weapon) playerInventory.getItem(command.getThirdWord().toLowerCase());
+          if (weapon != null) target.strikeMonster(weapon);
+        }
+      }
+    }
     return false;
   }
 
@@ -326,6 +354,15 @@ public class Game {
 
   private static int getHP() {
     return HP; 
+  }
+
+  public static void startFight() {
+    inFight = true;
+  }
+
+  public static void endFight() {
+    inFight = false;
+    currentRoom.destroyEntity(fighting);
   }
 
   /**
@@ -354,12 +391,12 @@ public class Game {
     String direction = command.getSecondWord();
     // Try to leave current room.
     Room nextRoom = currentRoom.nextRoom(direction);
-    // System.out.println(getCurrentRoom().getRoomCoords()); - to verify if we have started shapeshifting through walls
     if (nextRoom == null)
       System.out.println("You cannot go that way.");
     else {
       currentRoom = nextRoom;
       System.out.println(currentRoom.description(currentRoom));
+      System.out.println(getCurrentRoom().getRoomCoords()); // debugging purposes
     }
   }
 

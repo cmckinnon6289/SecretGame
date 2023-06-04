@@ -53,7 +53,10 @@ public class Room {
    * constructor).
    */
   public String description(Room room) {
-    return "Room: " + roomName + "\n\n" + description + "\n" + itemsInRoom;
+    if (Game.isConfused) {
+      return "Room: " + roomName + "\n\n" + "Nothing makes sense to you.\nThere are "+ passages.size() +" exits in this room.";
+    }
+    return "Room: " + roomName + "\n\n" + description;
   }
 
   /**
@@ -201,4 +204,50 @@ public class Room {
     return target;
   }
 
+  /**
+   * Checks to see if there are any instances of monsters in the room. If true, starts a fight and sets {@code Game.fighting} to the monster in the room.
+   */
+  public void checkForMonsters() {
+    if (this.itemsInRoom != null) {
+      for (Object item : this.itemsInRoom) {
+        if (item instanceof Monster) {
+          Game.startFight();
+          Game.fighting = (Monster) item;
+        }
+      }
+    }
+  }
+
+  public void destroyEntity(Monster target) {
+    for (int i = 0; i < this.itemsInRoom.size(); i++) {
+      Item currentItem = this.itemsInRoom.get(i);
+      if (currentItem instanceof Monster && currentItem.getName().toLowerCase().equals(target.getName().toLowerCase())) {
+        this.itemsInRoom.remove(i);
+      }
+    }
+  }
+
+  /**
+   * Gets the entity in the room matching the specified name.
+   * @return Monster
+   */
+  public Monster getEntity(String name) {
+    for (Item item : this.itemsInRoom) {
+      if (item instanceof Monster && item.getName().equals(name.toUpperCase())) {
+        return (Monster) item;
+      }
+    }
+    return null;
+  }
+
+  public void putItemInRoom(Item item) {
+    if (this.itemsInRoom != null) {
+      this.itemsInRoom.add(item);
+    } else {
+      ArrayList<Item> items = new ArrayList<Item>();
+      items.add(item);
+      this.itemsInRoom = items;
+      itemsList.put(Game.getCurrentRoom(),items);
+    }
+  }
 }
