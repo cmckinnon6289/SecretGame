@@ -227,6 +227,15 @@ public class Room {
     }
   }
 
+  public void lanternCheck() {
+    for (Item item : this.itemsInRoom) {
+      if (item instanceof Lantern) {
+        System.out.println("There is a lantern next to you.");
+        break;
+      }
+    }
+  }
+
   /**
    * Gets the entity in the room matching the specified name.
    * @return Monster

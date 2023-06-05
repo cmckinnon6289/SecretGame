@@ -175,6 +175,7 @@ public class Game {
       moves++;
       try {
         getCurrentRoom().checkForMonsters();
+        getCurrentRoom().lanternCheck();
         command = parser.getCommand();
         finished = processCommand(command);
         ambience();
@@ -392,7 +393,6 @@ public class Game {
     else {
       currentRoom = nextRoom;
       System.out.println(currentRoom.description(currentRoom));
-      System.out.println(getCurrentRoom().getRoomCoords()); // debugging purposes
     }
   }
 

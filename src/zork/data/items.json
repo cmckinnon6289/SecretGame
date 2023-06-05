@@ -123,6 +123,17 @@
             "isMonster": true,
             "hp": 10,
             "attack": 4
+        },
+        {
+            "name": "OLD-MAN", 
+            "x": -2, 
+            "y": -2,
+            "weight": 1000, 
+            "openable": false,
+            "isKey": false,
+            "isMonster": true,
+            "hp": 30,
+            "attack": 5
         }
     ]
 }
