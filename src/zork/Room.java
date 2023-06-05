@@ -226,7 +226,10 @@ public class Room {
       }
     }
   }
-
+  
+  /**
+  * Checks to see if there is a lantern in the current room. If true, alerts the player (lanterns are the only way a player can check rooms for items).
+  */
   public void lanternCheck() {
     for (Item item : this.itemsInRoom) {
       if (item instanceof Lantern) {
